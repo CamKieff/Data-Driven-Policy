@@ -1,4 +1,4 @@
-﻿# Type 2 Diabetes Mellitus Cardiovascular Outcomes (CVOT)Project
+﻿# Type 2 Diabetes Mellitus Cardiovascular Outcomes (CVOT) Project
 
 ### Diabetes Data Retrieval and Analysis
 
@@ -9,12 +9,11 @@ Industry funded interventional studies of Type 2 Diabetes (T2DM) from 1/1/2004 -
 
 Some of the exported (CSV) T2DM results had many study locations and formatting issues caused them to be wrapped around onto the next line. These were removed and saved as the edited file. In all retrieved CSV files the column headings were formatted and the first column of sequential numbers was removed prior to import into R.
 
-The file T2DM_yoy.R contains the analysis via an average year-over-year (yoy) percent change approach.
+The file T2DM_yoy.R contains an average year-on-year (yoy) percent change analysis of the clinical trial data.
 
-CTfunctions.R contains, as one might expect, the functions used for formatting clinical trial data and for creating output tables for yoy results.
+CTfunctions.R contains functions used for formatting clinical trial data and for creating output tables for yoy results.
 
-The file T2DM_regression.R contains initial exploratory analyses. There are several more graphs generated and the later analysis is on raw (rather than normalized) counts of clinical trials using linear regression to find changes over time.
-
+The file T2DM_regression.R contains initial exploratory analyses. This file contains a plethora of different methods for generating graphs and an analysis on raw (rather than normalized) counts of clinical trials using linear regression to find changes over time rather than percent change with yoy.
 
 ### Links to other ClinicalTrials.gov Searches
 
