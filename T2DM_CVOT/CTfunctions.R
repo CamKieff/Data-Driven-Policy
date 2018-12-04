@@ -1,6 +1,10 @@
 # functions for use with T2DM_yoy.R and T2DM_regression.R for formatting and doing data analysis
 # of ClinicalTrials.gov data
 
+require(plyr)
+require(dplyr)
+require(lubridate)
+
 # Pharmacetuical companies with greater than $10B market cap as of 2017. See link:
 # https://gfmasset.com/2017/01/the-200-largest-drug-pharmaceutical-companies-by-market-cap-2017/
 # plus boehringer ingelheim and samsung
