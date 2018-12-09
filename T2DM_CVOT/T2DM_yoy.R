@@ -7,10 +7,10 @@ setwd("~/GitHub/Data-Driven-Policy/T2DM_CVOT")
 source("CTfunctions.R")
 
 # list of filenames downloaded from ClinicalTrials.gov
-f <- c("2018-11-09-T2DM_clinical_trials_interventional_edit.csv", 
-       "2018-11-12-hypertension_clinical_trials_interventional.csv",
-       "2018-11-12-bcancer_clinical_trials_interventional.csv",
-       "2018-11-12-obesity_clinical_trials_interventional.csv")
+f <- c("Data/2018-11-09-T2DM_clinical_trials_interventional_edit.csv", 
+       "Data/2018-11-12-hypertension_clinical_trials_interventional.csv",
+       "Data/2018-11-12-bcancer_clinical_trials_interventional.csv",
+       "Data/2018-11-12-obesity_clinical_trials_interventional.csv")
 
 #run the formatting function on each dataset
 f_diabetes <- CTformat(f[1]) %>% mutate(DISEASE = "DIABETES")
@@ -40,12 +40,8 @@ names(f_v1) <- names(f_v2) <- names(f_diseases_ind) # rename columns
 f_diseases_ind <- bind_rows(f_diseases_ind, f_v1)
 f_diseases_nind <- bind_rows(f_diseases_nind, f_v2)
 
-# normalize data to 2004 baseline and extract all trials and diabetes data for plotting
-y1 <- ddply(f_diseases_ind, "DISEASE", function(x){ x["n"] <- x["n"] / x[1, "n"] * 100 })
-f_diseases_ind1 <- cbind(rep(seq(as.Date("2004-1-1"), as.Date("2017-1-1"), "years"),
-                                   nlevels(factor(y1$DISEASE))), y1) 
-names(f_diseases_ind1) <- c("START_DATE", "DISEASE", "n")
-f_diseases_ind1 %>% filter(DISEASE == "All Trials" | DISEASE == "Diabetes") -> f_diseases_ind1
+#industry trials plotting
+f_diseases_ind %>% filter(DISEASE == "All Trials" | DISEASE == "Diabetes") -> f_diseases_ind1
 
 g1 <- (ggplot(f_diseases_ind1, aes(x=START_DATE, y = n, color = DISEASE)) 
        + geom_line(size = 1.3)
@@ -54,8 +50,8 @@ g1 <- (ggplot(f_diseases_ind1, aes(x=START_DATE, y = n, color = DISEASE))
        + scale_x_date(date_breaks = "1 year", date_labels = "%Y")
        + labs(title = "Industry Clinical Trials", color = "Disease")
        + xlab("Trial Start Year")
-       + ylab("Normalized Clinical Trials")
-       + ylim(0,250)
+       + ylab("Number of Clinical Trials")
+       # + ylim(0,250)
        + scale_color_brewer(palette = "Set2")
        + theme_bw()
        + theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), 
@@ -66,21 +62,18 @@ g1 <- (ggplot(f_diseases_ind1, aes(x=START_DATE, y = n, color = DISEASE))
 )
 g1
 
-y2 <- ddply(f_diseases_nind, "DISEASE", function(x){ x["n"] <- x["n"] / x[1, "n"] * 100 })
-f_diseases_nind2 <- cbind(rep(seq(as.Date("2004-1-1"), as.Date("2017-1-1"), "years"),
-                              nlevels(factor(y2$DISEASE))), y2)
-names(f_diseases_nind2) <- c("START_DATE", "DISEASE", "n")
-f_diseases_nind2 %>% filter(DISEASE == "All Trials" | DISEASE == "Diabetes") -> f_diseases_nind2
+# non-industry trials plotting
+f_diseases_nind %>% filter(DISEASE == "All Trials" | DISEASE == "Diabetes") -> f_diseases_nind2
 
-g2 <- (ggplot(f_diseases_nind2, aes(x=START_DATE, y = n, color = DISEASE)) 
+g2 <- (ggplot(f_diseases_nind2, aes(x=START_DATE, y = n)) 
        + geom_line(size = 1.3)
        + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
                     color = "blue", linetype="dashed", size = 1 )
        + scale_x_date(date_breaks = "1 year", date_labels = "%Y")
-       + labs(title = "Non-Industry Clinical Trials", color = "Disease")
+       + labs(title = "Non-Industry Clinical Trials")
        + xlab("Trial Start Year")
-       + ylab("Normalized Clinical Trials")
-       + ylim(0,250)
+       + ylab("Number of Clinical Trials")
+       # + ylim(0,3500)
        + scale_color_brewer(palette = "Set2")
        + theme_bw()
        + theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), 

@@ -7,10 +7,10 @@ setwd("~/GitHub/Data-Driven-Policy/T2DM_CVOT")
 source("CTfunctions.R")
 
 # list of filenames downloaded from ClinicalTrials.gov
-f <- c("2018-11-09-T2DM_clinical_trials_interventional_edit.csv", 
-       "2018-11-12-hypertension_clinical_trials_interventional.csv",
-       "2018-11-12-bcancer_clinical_trials_interventional.csv",
-       "2018-11-12-obesity_clinical_trials_interventional.csv")
+f <- c("Data/2018-11-09-T2DM_clinical_trials_interventional_edit.csv", 
+       "Data/2018-11-12-hypertension_clinical_trials_interventional.csv",
+       "Data/2018-11-12-bcancer_clinical_trials_interventional.csv",
+       "Data/2018-11-12-obesity_clinical_trials_interventional.csv")
 
 #run the formatting function on each dataset
 f_diabetes <- CTformat(f[1]) %>% mutate(DISEASE = "DIABETES")
