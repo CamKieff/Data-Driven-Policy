@@ -15,6 +15,13 @@ CTfunctions.R contains functions used for formatting clinical trial data and for
 
 The file T2DM_regression.R contains initial exploratory analyses. This file contains a plethora of different methods for generating graphs and an analysis on raw (rather than normalized) counts of clinical trials using linear regression to find changes over time rather than percent change with yoy.
 
+### Patent Data from Google Patents
+
+Information on the number of patents filed for novel anti-diabetic agents was found using the following search:
+https://patents.google.com/?q=(diabetes)+(("type+2")+OR+("type-2"))+(("anti-diabetic+agent")+OR+("antidiabetic+agent"))&country=US&before=filing:20151231&after=filing:20150101&status=GRANT&language=ENGLISH&type=PATENT&page=1
+
+The dates were changed for each year, from 2004-2015. The number of results for each year was recorded and plotted.
+
 ### Links to other ClinicalTrials.gov Searches
 
 Link for breast cancer trials search:
