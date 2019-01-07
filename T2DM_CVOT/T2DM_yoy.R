@@ -1,6 +1,7 @@
-require(ggplot2)
-require(plyr)
-require(dplyr)
+library(ggplot2)
+library(plyr)
+library(dplyr)
+library(zoo)
 
 setwd("~/GitHub/Data-Driven-Policy/T2DM_CVOT")
 
@@ -65,7 +66,7 @@ g1
 # non-industry trials plotting
 f_diseases_nind %>% filter(DISEASE == "All Trials" | DISEASE == "Diabetes") -> f_diseases_nind2
 
-g2 <- (ggplot(f_diseases_nind2, aes(x=START_DATE, y = n)) 
+g2 <- (ggplot(f_diseases_nind2, aes(x=START_DATE, y = n, color = DISEASE)) 
        + geom_line(size = 1.3)
        + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
                     color = "blue", linetype="dashed", size = 1 )
@@ -88,3 +89,27 @@ post_2008_ind <- yoy_stats(f_diseases_ind, time.period = "POST2008")
 pre_2008_ind <- yoy_stats(f_diseases_ind, time.period = "PRE2008")
 post_2008_nind <- yoy_stats(f_diseases_nind, time.period = "POST2008")
 pre_2008_nind <- yoy_stats(f_diseases_nind, time.period = "PRE2008")
+
+# Google Patent analysis
+
+patents <- read.csv("data/2018-12-18_T2DM_google_patent_count.csv", header = TRUE)
+patents$YEAR <- as.Date(paste0(patents$YEAR, "-01-01"))
+
+g3 <- (ggplot(patents, aes(x=YEAR, y = PATENTS)) 
+       + geom_point(size = 3, color = "#FF0000AA")
+       + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
+                    color = "blue", linetype="dashed", size = 1 )
+       + geom_line(aes(y=rollmean(PATENTS, 3, na.pad = TRUE)), size = 1.3, linetype="dashed")
+       + scale_x_date(date_breaks = "1 year", date_labels = "%Y")
+       + labs(title = "Patents for Anti-Diabetic Agents")
+       + xlab("Year Filed")
+       + ylab("Number of Patents")
+       + ylim(0,70)
+       + theme_bw()
+       + theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), 
+               axis.line = element_line(colour = "black"), panel.border = element_blank(),
+               axis.text = element_text(size=12), axis.title = element_text(size=14), 
+               plot.title = element_text(size = 20), legend.text = element_text(size = 12),
+               legend.title = element_text(size = 14))
+)
+g3
