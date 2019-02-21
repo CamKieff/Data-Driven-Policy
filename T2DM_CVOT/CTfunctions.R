@@ -62,7 +62,7 @@ yoy_stats <- function(y, time.period = "POST2008"){
     print("time.period must be PRE2008 or POST2008")
   }
   
-  y2 <- ddply(y, "DISEASE", function(x){ x["n"] / c(NA, x["n"][-nrow(x["n"]),]) * 100 -100})
+  y2 <- ddply(y, "DISEASE", function(x){ x["n"] / c(NA, x["n"][-nrow(x["n"]),]) * 100 -100}) #divide y by y(-1) to get year-over-year change
   y3 <- ddply(y2, "DISEASE", function(x){mean(x$n, na.rm = TRUE)})
   y4 <- ddply(y2, "DISEASE", function(x){sd(x$n, na.rm = TRUE)})
   y5 <- ddply(y2, "DISEASE", function(x){sd(x$n, na.rm = TRUE)/(sqrt(length(x$n)-1))})
