@@ -10,9 +10,9 @@ source("CTfunctions.R")
 
 # list of filenames downloaded from ClinicalTrials.gov
 f <- c("Data/2019-01-14-T2DM_clinical_trials_interventional_2000-2017.csv", 
-       "Data/2018-11-12-hypertension_clinical_trials_interventional.csv",
+       "Data/2019-03-28-hypertension_clinical_trials_interventional_2000-2017.csv",
        "Data/2019-01-22-bcancer_clinical_trials_interventional_2000-2017.csv",
-       "Data/2018-11-12-obesity_clinical_trials_interventional.csv",
+       "Data/2019-03-28-obesity_clinical_trials_interventional_2000-2017.csv",
        "Data/2019-01-22-depression_clinical_trials_interventional_2000-2017.csv")
 
 # run the import/formatting function on each dataset
@@ -29,8 +29,8 @@ f_all$DISEASE <- revalue(f_all$DISEASE, c("BREAST_CANCER" = "Breast Cancer", "DI
 f_all %>% filter(INDUSTRY == TRUE) %>% group_by(START_DATE, DISEASE) %>% tally() -> f_diseases_ind # select industry
 f_all %>% filter(INDUSTRY == FALSE) %>% group_by(START_DATE, DISEASE) %>% tally() -> f_diseases_nind # select non-industry
 
-f_diseases_ind$START_DATE <- as.Date(paste0(f_diseases_ind$START_DATE, "-01-01"))
-f_diseases_nind$START_DATE <- as.Date(paste0(f_diseases_nind$START_DATE, "-01-01"))
+# f_diseases_ind$START_DATE <- as.Date(paste0(f_diseases_ind$START_DATE, "-01-01"))
+# f_diseases_nind$START_DATE <- as.Date(paste0(f_diseases_nind$START_DATE, "-01-01"))
 
 # bind hand extracted total intervetional clinical trials (phase 1,2,3) for industry 
 # and non-industry to f_diseases data.frames
@@ -53,7 +53,7 @@ g1 <- (ggplot(f_diseases_ind1, aes(x=START_DATE, y = n))
        + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
                     color = "blue", linetype="dashed", size = 1 )
        + scale_x_date(date_breaks = "1 year", date_labels = "'%y")
-       + labs(title = "Industry T2DM Clinical Trials")
+       + labs(title = "Industry-Sponsored T2DM Clinical Trials")
        + xlab("Trial Start Year")
        + ylab("Number of Clinical Trials")
        + ylim(0,max(f_diseases_ind1$n))
@@ -69,7 +69,7 @@ g2 <- (ggplot(f_diseases_ind2, aes(x=START_DATE, y = n))
        + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
                     color = "blue", linetype="dashed", size = 1 )
        + scale_x_date(date_breaks = "1 year", date_labels = "'%y")
-       + labs(title = "All Industry Clinical Trials")
+       + labs(title = "All Industry-Sponsored Clinical Trials")
        + xlab("Trial Start Year")
        + ylab("Number of Clinical Trials")
        + ylim(0,max(f_diseases_ind2$n))
@@ -149,3 +149,71 @@ g5 <- (ggplot(patents, aes(x=YEAR, y = Type2Diabetes))
                legend.title = element_text(size = 14))
 )
 g5
+
+# plot of clinical trial data by phase
+f_all %>% filter(INDUSTRY == TRUE) %>% group_by(START_DATE, DISEASE, PHASES) %>% tally() -> f_diseases_phases
+f_diseases_phases %>% filter(DISEASE == "Diabetes") -> f_diseases_phases1
+g6 <- (ggplot(f_diseases_phases1, aes(x=START_DATE, y = n, color = PHASES)) 
+       + geom_line(size = 1.3)
+       + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
+                    color = "blue", linetype="dashed", size = 1 )
+       + scale_x_date(date_breaks = "1 year", date_labels = "'%y")
+       + labs(title = "Industry-Sponsored T2DM Clinical Trials by Phase")
+       + xlab("Trial Start Year")
+       + ylab("Number of Clinical Trials")
+       + ylim(0,max(f_diseases_phases1$n))
+       + theme_bw()
+       + scale_colour_brewer(palette = "Set2")
+       + theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), 
+               axis.line = element_line(colour = "black"), panel.border = element_blank(),
+               axis.text = element_text(size=14), axis.title = element_text(size=16), 
+               plot.title = element_text(size = 24), legend.text = element_text(size = 12),
+               legend.title = element_text(size = 14))
+)
+g6
+
+# Plot by therapeutic area, including non diabetes drugs
+f_diseases_ind %>% filter(DISEASE != "All Trials") -> f_diseases_TA
+g7 <- (ggplot(f_diseases_TA, aes(x=START_DATE, y = n, color = DISEASE)) 
+       + geom_line(size = 1.3)
+       + geom_line(data = f_diseases_TA[f_diseases_TA$DISEASE == "Diabetes",], size = 2) # bold diabetes line
+       + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
+                    color = "blue", linetype="dashed", size = 1 )
+       + scale_x_date(date_breaks = "1 year", date_labels = "'%y")
+       + labs(title = "Industry-Sponsored Clinical Trials by Therapeutic Area")
+       + xlab("Trial Start Year")
+       + ylab("Number of Clinical Trials")
+       + ylim(0,max(f_diseases_TA$n))
+       + theme_bw()
+       + scale_colour_brewer(palette = "Set2")
+       + theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), 
+               axis.line = element_line(colour = "black"), panel.border = element_blank(),
+               axis.text = element_text(size=14), axis.title = element_text(size=16), 
+               plot.title = element_text(size = 24), legend.text = element_text(size = 12),
+               legend.title = element_text(size = 14))
+)
+g7
+
+f_diseases_phases %>% 
+        filter(PHASES == "Phase 1") %>%
+        yoy_stats(time.period = "PRE2008")
+
+f_diseases_phases %>% 
+        filter(PHASES == "Phase 2") %>%
+        yoy_stats(time.period = "PRE2008")
+
+f_diseases_phases %>% 
+        filter(PHASES == "Phase 3") %>%
+        yoy_stats(time.period = "PRE2008")
+
+as_tibble(f_all) %>%
+        filter(INDUSTRY == TRUE & DISEASE == "Diabetes") -> test
+
+# Find enrollment statistics
+test$ENROLLMENT <- as.numeric(levels(test$ENROLLMENT))[test$ENROLLMENT]
+mean(test$ENROLLMENT, na.rm = TRUE)
+sd(test$ENROLLMENT, na.rm = TRUE)/sqrt(sum(!is.na(test$ENROLLMENT)))
+
+test %>%
+        select(PHASES, ENROLLMENT) %>% 
+        aggregate(. ~ PHASES, ., FUN = function(x){sd(x)/sqrt(length(x))})
