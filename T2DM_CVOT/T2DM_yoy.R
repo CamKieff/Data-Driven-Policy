@@ -9,22 +9,40 @@ setwd("~/GitHub/Data-Driven-Policy/T2DM_CVOT")
 source("CTfunctions.R")
 
 # list of filenames downloaded from ClinicalTrials.gov
-f <- c("Data/2019-01-14-T2DM_clinical_trials_interventional_2000-2017.csv", 
+f <- c("Data/OtherTherapeuticAreas/2019-05-20-alzheimers.csv", 
+       "Data/OtherTherapeuticAreas/2019-05-20-anxiety.csv", 
+       "Data/OtherTherapeuticAreas/2019-05-20-asthma.csv", 
+       "Data/OtherTherapeuticAreas/2019-05-20-dyslipidemia.csv", 
+       "Data/OtherTherapeuticAreas/2019-05-20-HIV.csv",
+       "Data/OtherTherapeuticAreas/2019-05-20-NASH.csv", 
+       "Data/OtherTherapeuticAreas/2019-05-20-non-small-cell-lung-cancer.csv",
+       "Data/OtherTherapeuticAreas/2019-05-20-type1-diabetes.csv",
+       "Data/2019-01-14-T2DM_clinical_trials_interventional_2000-2017.csv", 
        "Data/2019-03-28-hypertension_clinical_trials_interventional_2000-2017.csv",
        "Data/2019-01-22-bcancer_clinical_trials_interventional_2000-2017.csv",
        "Data/2019-03-28-obesity_clinical_trials_interventional_2000-2017.csv",
-       "Data/2019-01-22-depression_clinical_trials_interventional_2000-2017.csv")
+       "Data/2019-01-22-depression_clinical_trials_interventional_2000-2017.csv",
+       "Data/OtherTherapeuticAreas/2019-05-21-nephropathy.csv")
 
 # run the import/formatting function on each dataset
-f_diabetes <- CTformat(f[1]) %>% mutate(DISEASE = "DIABETES")
-f_HBP <- CTformat(f[2]) %>% mutate(DISEASE = "HYPERTENSION")
-f_bcancer <- CTformat(f[3]) %>% mutate(DISEASE = "BREAST_CANCER")
-f_obesity <- CTformat(f[4]) %>% mutate(DISEASE = "OBESITY")
-f_depression <- CTformat(f[5]) %>% mutate(DISEASE = "DEPRESSION")
+f_alz <- CTformat(f[1]) %>% mutate(DISEASE = "Alzheimers")
+f_anx <- CTformat(f[2]) %>% mutate(DISEASE = "Anxiety")
+f_ast <- CTformat(f[3]) %>% mutate(DISEASE = "Asthma")
+f_dys <- CTformat(f[4]) %>% mutate(DISEASE = "Dyslipidemia")
+f_hiv <- CTformat(f[5]) %>% mutate(DISEASE = "HIV")
+f_nash <- CTformat(f[6]) %>% mutate(DISEASE = "NASH")
+f_nsclc <- CTformat(f[7]) %>% mutate(DISEASE = "NSCLCancer")
+f_type1 <- CTformat(f[8]) %>% mutate(DISEASE = "Diabetes1")
+f_type2 <- CTformat(f[9]) %>% mutate(DISEASE = "Diabetes2")
+f_hyp <- CTformat(f[10]) %>% mutate(DISEASE = "Hypertension")
+f_bre <- CTformat(f[11]) %>% mutate(DISEASE = "BreastCancer")
+f_obe <- CTformat(f[12]) %>% mutate(DISEASE = "Obesity")
+f_dep <- CTformat(f[13]) %>% mutate(DISEASE = "Depression")
+f_nep <- CTformat(f[14]) %>% mutate(DISEASE = "Nephropathy")
+
 
 # combine datasets and rename diseases (for graphing)
-f_all <- rbind(f_HBP, f_bcancer, f_obesity, f_diabetes, f_depression)
-f_all$DISEASE <- revalue(f_all$DISEASE, c("BREAST_CANCER" = "Breast Cancer", "DIABETES" = "Diabetes", "HYPERTENSION" = "Hypertension", "OBESITY" = "Obesity", "DEPRESSION" = "Depression"))
+f_all <- rbind(f_alz, f_anx, f_ast, f_dys, f_hiv, f_nash, f_nsclc, f_type1, f_type2, f_hyp, f_bre, f_obe, f_dep, f_nep)
 
 f_all %>% filter(INDUSTRY == TRUE) %>% group_by(START_DATE, DISEASE) %>% tally() -> f_diseases_ind # select industry
 f_all %>% filter(INDUSTRY == FALSE) %>% group_by(START_DATE, DISEASE) %>% tally() -> f_diseases_nind # select non-industry
@@ -45,7 +63,7 @@ f_diseases_ind <- bind_rows(f_diseases_ind, f_v1)
 f_diseases_nind <- bind_rows(f_diseases_nind, f_v2)
 
 #industry trials plotting
-f_diseases_ind %>% filter(DISEASE == "Diabetes") -> f_diseases_ind1
+f_diseases_ind %>% filter(DISEASE == "Diabetes2") -> f_diseases_ind1
 f_diseases_ind %>% filter(DISEASE == "All Trials") -> f_diseases_ind2
 
 g1 <- (ggplot(f_diseases_ind1, aes(x=START_DATE, y = n)) 
@@ -174,9 +192,11 @@ g6
 
 # Plot by therapeutic area, including non diabetes drugs
 f_diseases_ind %>% filter(DISEASE != "All Trials") -> f_diseases_TA
+f_diseases_TA %>% filter(DISEASE == "Diabetes2" | DISEASE == "Hypertension" | DISEASE == "BreastCancer" | DISEASE == "Obesity" | DISEASE == "Depression" | DISEASE == "Nephropathy") -> f_diseases_TA
 g7 <- (ggplot(f_diseases_TA, aes(x=START_DATE, y = n, color = DISEASE)) 
        + geom_line(size = 1.3)
-       + geom_line(data = f_diseases_TA[f_diseases_TA$DISEASE == "Diabetes",], size = 2) # bold diabetes line
+       #+ facet_wrap(~ DISEASE, ncol = 4)
+       + geom_line(data = f_diseases_TA[f_diseases_TA$DISEASE == "Diabetes2",], size = 2) # bold diabetes line
        + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
                     color = "blue", linetype="dashed", size = 1 )
        + scale_x_date(date_breaks = "1 year", date_labels = "'%y")
