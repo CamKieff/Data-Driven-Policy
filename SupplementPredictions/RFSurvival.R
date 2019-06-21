@@ -55,16 +55,49 @@ working_df <- distinct(working_df) # delete duplicate rows
 
 orig_df <- working_df %>% filter(SubmissionType == "ORIG") # create Data.frame of original applications
 
-dupe_df <- orig_df[orig_df$SubmissionNo == 2,]
+dupe_df <- orig_df[orig_df$SubmissionNo == 2,] # find potential duplicate submissions
+
 for (i in 1:nrow(dupe_df)){
-  # first test if there are two apps in orig_df that have the same applno
-  # delete duplicated original applications
+  
+  # first test if there are two applications in orig_df that have the same ApplNo
+  if(nrow(orig_df[orig_df$ApplNo == dupe_df$ApplNo[i],]) > 1){
+    
+    # delete duplicated original applications
+    remove.num <- as.numeric(rownames(orig_df[orig_df$ApplNo == dupe_df$ApplNo[i] & orig_df$SubmissionNo == 2,]))
+    orig_df <- orig_df[-remove.num,]
+  }
 }
 
+colnames(orig_df)[5] <- "Orig_App_Date"
 
-#create new row in working_df of originial submission date matched by ApplNo
+# combine supplements with the original 
+survival_df <- left_join(working_df, orig_df[c("ApplNo", "Orig_App_Date")], by = "ApplNo")
+survival_df <- survival_df %>% filter(!is.na(Orig_App_Date)) %>% mutate(DAY_DELAY = SubmissionStatusDate - Orig_App_Date)
+survival_df <- survival_df %>% group_by(ApplNo) %>% top_n(-2, wt = DAY_DELAY) %>% ungroup()
 
+survival.df.orig <- survival_df %>% filter(SubmissionType == "ORIG") %>% select(-SubmissionNo, -SubmissionStatusDate, -DAY_DELAY, -SubmissionType)
+survival.df.suppl <- survival_df %>% filter(SubmissionType == "SUPPL") %>% select(-Orig_App_Date, -ApplType, -SponsorName, -NAME_EDIT, -EMPLOYEES, -ESTIMATED, -SubmissionType)
+
+new.survival <- left_join(survival.df.orig, survival.df.suppl, by = "ApplNo")
+new.survival <- new.survival %>% mutate(SURVIVAL = as.integer(!is.na(DAY_DELAY))) %>% 
+  mutate(NDA = as.integer(grepl("NDA", .$ApplType))) %>% select(-ApplType) %>%
+  mutate(ORIG_PRIORITY = as.integer(grepl("PRIORITY", .$ReviewPriority.x))) %>% select(-ReviewPriority.x)
+
+# for products without supplements, calculate the number of days since original approval.
+# these are the censored values
+new.survival[is.na(new.survival$DAY_DELAY),]$DAY_DELAY <- (Sys.Date()-new.survival[is.na(new.survival$DAY_DELAY),]$Orig_App_Date)
+
+new.companies <- unique(new.survival[is.na(new.survival$NAME_EDIT),]$SponsorName)
+write.csv(new.companies, "new_company_names.csv")
 # ------------------------------------- Random Forest Survival -----------------------------------
+
+df <- new.survival %>% filter(!is.na(EMPLOYEES)) %>% filter(DAY_DELAY > 0) #remove companies without employee values
+df$EMPLOYEES <- as.integer(df$EMPLOYEES)
+df$DAY_DELAY <- as.integer(df$DAY_DELAY)
+df$SubmissionClassCodeID.x <- factor(df$SubmissionClassCodeID.x)
+df$NDA <- factor(df$NDA)
+df$ORIG_PRIORITY <- factor(df$ORIG_PRIORITY)
+str(df)
 
 # manually create test data
 set.seed(1606)
@@ -72,9 +105,13 @@ training_row <- sample(round(nrow(df)*0.7, 0), replace = FALSE)
 training.data <- df[training_row, ]
 test.data <- df[-training_row,]
 
-z <- Surv() # create survival analysis object that Surv(time, status)
+z <- with(training.data, Surv(DAY_DELAY, SURVIVAL)) # create survival analysis object that Surv(time, status)
 
 # rfimpute() # impute data if needed
 
-fit <- rfsrc(z ~ ., data = training.data, importance = TRUE)
+fit <- rfsrc(Surv(DAY_DELAY, SURVIVAL) ~ ORIG_PRIORITY + NDA + EMPLOYEES, data = as.data.frame(training.data), ntree = 1000, mtry = 2, importance = TRUE)
 plot(fit)
+fit
+
+pred <- predict.rfsrc(fit, newdata = test.data, na.action = "na.impute")
+plot.survival(pred)
