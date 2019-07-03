@@ -14,8 +14,8 @@ nov_app$SubmissionStatusDate <- as.Date(nov_app$SubmissionStatusDate, format = "
 
 # Download database with application type (NDA or BLA)
 temp <- tempfile() 
-download.file("https://www.fda.gov/downloads/Drugs/InformationOnDrugs/UCM527389.zip",temp)
-applications <- read.csv(unz(temp, "Applications.txt"), sep = "\t", header = TRUE) %>% select(-ApplPublicNotes)
+download.file("https://www.fda.gov/media/89850/download",temp, mode = "wb")
+applications <- read.csv(file = unz(description = temp, "Applications.txt"), sep = "\t", header = TRUE)
 unlink(temp)
 
 # This is PED data extracted from Drugs@FDA; PED Boxes were added manually
@@ -205,3 +205,26 @@ h1 <- (h + geom_point(aes(size = NUMBER, color = PERCENT))
 )
 h1
 
+# ------------------------------------**Chi Squares**---------------------------------
+
+boxes.48 <- app_PED_NME %>% filter(BOXNA == 0) 
+
+# Breakthrough Therapy (p = 0.47)
+BTDtbl <- table(!boxes.48$BOX18, boxes.48$BTD)
+chisq.test(BTDtbl, correct = FALSE) #correct = FALSE turns off the Yates correction for continuity. 
+
+# Orphan Designation (p = 0.068)
+ORPHtbl <- table(!boxes.48$BOX18, boxes.48$ORPH)
+chisq.test(ORPHtbl, correct = FALSE) 
+
+# Priority Review (p = 0.095)
+PRtbl <- table(!boxes.48$BOX18, boxes.48$PR)
+chisq.test(PRtbl, correct = FALSE) 
+
+# Fast Track (p = 0.23)
+FTtbl <- table(!boxes.48$BOX18, boxes.48$FT)
+chisq.test(FTtbl, correct = FALSE) 
+
+test <- boxes.48 %>% filter(BTD == 0)
+testtbl <- table(!test$BOX18, test$PR)
+chisq.test(testtbl, correct = FALSE)
