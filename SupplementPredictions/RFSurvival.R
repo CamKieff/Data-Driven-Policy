@@ -82,7 +82,7 @@ survival_df <- survival_df %>% group_by(ApplNo) %>% top_n(-2, wt = DAY_DELAY) %>
 
 # split the df by row 
 survival.df.orig <- survival_df %>% filter(SubmissionType == "ORIG") %>% select(-SubmissionNo, -SubmissionStatusDate, -DAY_DELAY, -SubmissionType)
-survival.df.suppl <- survival_df %>% filter(SubmissionType == "SUPPL") %>% select(-Orig_App_Date, -ApplType, -SponsorName, -NAME_EDIT, -EMPLOYEES, -ESTIMATED, -SubmissionType)
+survival.df.suppl <- survival_df %>% filter(SubmissionType == "SUPPL") %>% select(-Orig_App_Date, -ApplType, -SponsorName, -NAME_EDIT, -EMPLOYEES, -ESTIMATED, -SubmissionType, -STOCK)
 
 # re-combine df by column
 new.survival <- left_join(survival.df.orig, survival.df.suppl, by = "ApplNo")
@@ -97,17 +97,42 @@ new.survival[is.na(new.survival$DAY_DELAY),]$DAY_DELAY <- (Sys.Date()-new.surviv
 # this df is a convenient format for finding products by company name while searching Owler
 search_df <- left_join(new.survival[,c("ApplNo", "SponsorName", "NAME_EDIT")], products[,c("ApplNo", "DrugName", "ActiveIngredient")], by = "ApplNo")
 
-#export a list of companies that do not have Owler data
-new.companies <- unique(new.survival[is.na(new.survival$NAME_EDIT),]$SponsorName)
-write.csv(new.companies, "new_company_names.csv")
+new.products <- products %>% select(ApplNo, DrugName, ActiveIngredient) %>% unique()
+new.products$DrugName <- tolower(new.products$DrugName)
+new.products$ActiveIngredient <- tolower(new.products$ActiveIngredient)
+new.survival <- left_join(new.survival, new.products, by = "ApplNo")
+
+# financial data from Medtrack
+RandD <- read.csv('Medtrack/medtrack_RandD_edit.csv', header = TRUE, na.strings=c("","NA"))
+Finances <- read.csv('Medtrack/medtrack_Finances_edit.csv', header = TRUE, na.strings=c("","NA"))
+
+medtrack_comb <- left_join(Finances, RandD[-1], by = "TICKER")
+
+surv.medtrack <- left_join(new.survival, medtrack_comb, by = c("STOCK" = "TICKER"))
+
+surv.medtrack <- unique(surv.medtrack) %>% 
+  filter(STOCK != "") %>% 
+  group_by(ApplNo) %>% 
+  top_n(-1, wt = SubmissionNo) %>% 
+  ungroup() 
+surv.medtrack$NUM_EMPLOYEES <- as.numeric(sub(",", "",surv.medtrack$NUM_EMPLOYEES))
+surv.medtrack$REVENUE <- as.numeric(sub(",", "",surv.medtrack$REVENUE))
+
+# currency conversion table
+
+FX_tbl <- read.csv("currency_table.csv", header = TRUE)
+
+surv.medtrack <- left_join(surv.medtrack, FX_tbl, by = "FIN_CURRENCY")
+surv.medtrack$MARKET_CAP <- as.numeric(sub(",", "",surv.medtrack$MARKET_CAP)) 
+surv.medtrack$MARKET_CAP_FX <- surv.medtrack$MARKET_CAP * surv.medtrack$EX_RATE
 
 # ------------------------------------- Random Forest Survival -----------------------------------
 
 # format new.survival data.frame for analysis
-df <- new.survival %>% filter(!is.na(EMPLOYEES)) %>% 
-  filter(EMPLOYEES > 0) %>% # remove companies without employee values.
-  filter(DAY_DELAY > 0) # make sure DAY_DELAY is positive
-df$EMPLOYEES <- as.integer(df$EMPLOYEES) # make sure value is integer
+df <- surv.medtrack %>% filter(!is.na(NUM_EMPLOYEES)) %>% 
+  filter(NUM_EMPLOYEES > 0) %>% # remove companies without employee values.
+  filter(DAY_DELAY >= 0) %>% # make sure DAY_DELAY is positive
+  filter(!is.na(REVENUE))
 df$DAY_DELAY <- as.integer(df$DAY_DELAY)
 df$SubmissionClassCodeID.x <- factor(df$SubmissionClassCodeID.x) # turn these columns into classification values rather than numbers
 df$SubmissionClassCodeID.y <- factor(df$SubmissionClassCodeID.y)
@@ -124,7 +149,9 @@ test.data <- df[-training_row,]
 
 # rfimpute() # impute data if needed
 
-fit <- rfsrc(Surv(DAY_DELAY, SURVIVAL) ~ ORIG_PRIORITY + NDA + EMPLOYEES, data = as.data.frame(training.data), ntree = 1000, mtry = 2, importance = TRUE)
+fit <- rfsrc(Surv(DAY_DELAY, SURVIVAL) ~ ORIG_PRIORITY + NDA + NUM_EMPLOYEES + RD_SPEND + MARKET_CAP_FX,
+             data = as.data.frame(training.data), ntree = 1000, mtry = 2,
+             importance = TRUE, na.action = "na.impute")
 plot(fit)
 fit
 
@@ -133,3 +160,4 @@ fit
 
 pred <- predict.rfsrc(fit, newdata = test.data, na.action = "na.impute")
 plot.survival(pred)
+pred

@@ -8,8 +8,8 @@ library(stringr)
 
 setwd("~/GitHub/Data-Driven-Policy/PatientExperienceData") #set working directory
 
-#Data extracted from 2018 CDER New Drug Approval Document (https://www.fda.gov/drugs/developmentapprovalprocess/druginnovation/ucm592464.htm)
-nov_app <- read.csv("2019-01-31_novel_approvals_withBW.csv", header = TRUE)
+#Data extracted from 2018 CDER New Drug Approval Document (https://www.fda.gov/media/120357/download)
+nov_app <- read.csv("2019-01-31_novel_approvals.csv", header = TRUE)
 nov_app$SubmissionStatusDate <- as.Date(nov_app$SubmissionStatusDate, format = "%m/%d/%Y")
 
 # Download database with application type (NDA or BLA)
@@ -37,7 +37,8 @@ app_PED$BOX1[app_PED$BOX1 > 0] <-1
 app_PED$BOX13 <- app_PED$BOX13 + app_PED$BOX14 + app_PED$BOX15 + app_PED$BOX16 + app_PED$BOX17
 app_PED$BOX13[app_PED$BOX13 > 0] <-1
 
-# Adjudicated boxes for three drugs with ambiguous boxes checked
+#  ********* Adjudicated boxes for three drugs with ambiguous boxes checked **************
+
 app_PED[app_PED$DrugName == "TAKHZYRO","BOX8"] <- 0 # move box 8 to box 15 (not submitted by sponsor)
 app_PED[app_PED$DrugName == "TAKHZYRO","BOX15"] <- 1
 app_PED[app_PED$DrugName == "PALYNZIQ","BOX14"] <- 1 # box 13 indicates there was a PKU Alliance meeting 
@@ -51,7 +52,7 @@ app_PED_NME <- app_PED %>% filter(NME == 1) %>%
   mutate(num_box = BOX1 + BOX2 + BOX3 + BOX4 + BOX5 + BOX6 + BOX7 + BOX8 + BOX9 + BOX10 + BOX11 
          + BOX12 + BOX13 + BOX14 + BOX15 + BOX16 + BOX17 + BOX18) %>%
   mutate(term_box = BOX3 + BOX4 + BOX5 + BOX6 + BOX7 + BOX8 + BOX9 + BOX10 + BOX11
-        + BOX12 + BOX14 + BOX15 + BOX16 + BOX17 + BOX18) %>% #terminal box sum, excluding boxes 1,2,13
+        + BOX12 + BOX14 + BOX15 + BOX16 + BOX17 + BOX18) %>% # terminal box sum, excluding boxes 1,2,13
   mutate(SectionA_notCOA = BOX7 + BOX8 + BOX9 + BOX10 + BOX11 + BOX12) # Non-COA parts of section A variable
 
 write.csv(app_PED_NME, "2019_04-18_formatted_PED_output.csv")
@@ -179,6 +180,7 @@ heatmap.df$BOX <- as.numeric(str_remove(heatmap.df$BOX, "BOX"))
 
 heatmap.df <- heatmap.df %>% filter(NUMBER > 0) %>%
   filter(BOX != 1) %>% filter(BOX != 2) %>% filter(BOX != 13) # remove zero counts and non-terminal boxes
+
 # reorder levels for plotting
 heatmap.df$Group.1 <- factor(heatmap.df$Group.1, levels = c("DOP", "DHP", "ODE3", "ODE2", "ODE1", "OAP"))
 
@@ -199,13 +201,12 @@ h1 <- (h + geom_point(aes(size = NUMBER, color = PERCENT))
                axis.text = element_text(size=14), axis.title = element_text(size=16), 
                plot.title = element_text(size = 24), legend.text = element_text(size = 12),
                legend.title = element_text(size = 14))
-       #+coord_flip() # For vertical plot
-       #+ scale_x_reverse(breaks = c(3,4,5,6,7,8,9,10,11,12,14,15,16,17,18), minor_breaks = NULL)
-       
+      
 )
 h1
 
 # ------------------------------------**Chi Squares**---------------------------------
+# not used in the final paper. A Fisher's exact test may be more appropriate given the small numbers.
 
 boxes.48 <- app_PED_NME %>% filter(BOXNA == 0) 
 

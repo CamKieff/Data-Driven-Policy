@@ -1,6 +1,8 @@
-﻿# Type 2 Diabetes Mellitus Cardiovascular Outcomes (CVOT) Project
+﻿# Impact of FDA-Required Cardiovascular Outcome Trials on Type 2 Diabetes Clinical Study Initiation From 2008 to 2017
 
-### Diabetes Data Retrieval and Analysis
+Kieffer, C. M., & Robertson, A. S. (2019). Impact of FDA-Required Cardiovascular Outcome Trials on Type 2 Diabetes Clinical Study Initiation From 2008 to 2017. _Therapeutic Innovation & Regulatory Science_. https://doi.org/10.1177/2168479019860122
+
+### Data Retrieval and Analysis
 
 Diabetes data were retrieved from [ClinicalTrials.gov][1]
 
