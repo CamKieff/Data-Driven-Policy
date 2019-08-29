@@ -5,6 +5,7 @@ library(tidyr)
 library(stringr)
 library(randomForestSRC)
 library(survival)
+library(fastDummies)
 
 setwd("~/GitHub/Data-Driven-Policy/SupplementPredictions")
 
@@ -22,136 +23,237 @@ app_docs <- read.csv("drugsAtFDA_Local/ApplicationDocs.txt",
 applications <- read.csv("drugsAtFDA_Local/Applications.txt",
                          sep = "\t", header = TRUE) %>% select(-ApplPublicNotes)
 
-company_names <- read.csv('unique_sponsors_2012.csv', header = TRUE)
-employees <- read.csv("2019_pharma_employees.csv", header = TRUE)
+company_names <- read.csv('unique_sponsors_2012.csv', header = TRUE) %>% select(-X)
 
 # minor text and date formatting
 app_docs$SubmissionType <- trimws(app_docs$SubmissionType)
-# app_docs$ApplicationDocsDate <- as.Date(app_docs$ApplicationDocsDate)
 submissions$SubmissionStatusDate <- as.Date(submissions$SubmissionStatusDate)
 
 # --------------------------------------- Combine Datasets --------------------------------------
-start_date <- "2012-01-01"
+start_date <- "2009-01-01"
 end_date <- Sys.Date()
   
 working_df <- submissions %>%
   filter(SubmissionStatusDate >= as.Date(start_date) & 
            SubmissionStatusDate < as.Date(end_date)) %>%
   select(-SubmissionsPublicNotes, -SubmissionStatus)
-  # filter(SubmissionType == "ORIG") %>%
   # filter(SubmissionClassCodeID == 7 | SubmissionClassCodeID == 8)
 
 # combine all the data.frames together
 working_df <- left_join(working_df, app_docs[,c("ApplNo", "ApplicationDocsTypeID")], by = "ApplNo")
 working_df <- left_join(working_df, products, by = "ApplNo")
 working_df <- left_join(working_df, applications, by = "ApplNo")
-working_df <- left_join(working_df, company_names, by = c("SponsorName" = "NAME")) # this causes a harmless warning about charactesr and factors
-working_df <- left_join(working_df, employees, by = "NAME_EDIT")
+working_df <- left_join(working_df, company_names, by = c("SponsorName" = "NAME")) # this causes a harmless warning about characters and factors
 
-working_df <- working_df %>% filter(ApplType != "ANDA") %>% # remove ANDAs leaving only BLA and NDA
-  select(-ApplicationDocsTypeID, -ProductNo, -ReferenceDrug, -ReferenceStandard, -DrugName, -ActiveIngredient, -Form, -Strength) #remove exces columns to help with duplicate removal
+working_df <- working_df %>% 
+  filter(ApplType != "ANDA") %>% # remove ANDAs leaving only BLA and NDA
+  select(-ApplicationDocsTypeID, -ProductNo, -ReferenceDrug, -ReferenceStandard, -DrugName, -ActiveIngredient, -Form, -Strength) %>% #remove excess columns to help with duplicate removal
+  distinct() # delete duplicate rows
 
-working_df <- distinct(working_df) # delete duplicate rows
-
-orig_df <- working_df %>% filter(SubmissionType == "ORIG") # create Data.frame of original applications
-
-dupe_df <- orig_df[orig_df$SubmissionNo == 2,] # find potential duplicate submissions
-
-# test dupe_df for duplicate submissions and remove them from orig_df
-for (i in 1:nrow(dupe_df)){
-  
-  # first test if there are two applications in orig_df that have the same ApplNo
-  if(nrow(orig_df[orig_df$ApplNo == dupe_df$ApplNo[i],]) > 1){
-    
-    # delete duplicated original applications
-    remove.num <- as.numeric(rownames(orig_df[orig_df$ApplNo == dupe_df$ApplNo[i] & orig_df$SubmissionNo == 2,]))
-    orig_df <- orig_df[-remove.num,]
-  }
-}
+orig_df <- working_df %>% # remove a few duplicate ORIG applications 
+  filter(SubmissionType == "ORIG") %>%
+  group_by(ApplNo) %>%
+  top_n(-1, wt = SubmissionNo) %>% 
+  ungroup() # create Data.frame of original applications
 
 colnames(orig_df)[5] <- "Orig_App_Date" # rename column
 
-# combine supplements with the original 
-survival_df <- left_join(working_df, orig_df[c("ApplNo", "Orig_App_Date")], by = "ApplNo") # add original application approval date
-survival_df <- survival_df %>% filter(!is.na(Orig_App_Date)) %>% 
+# combine all applications with the unique originals
+survival_df <- left_join(working_df, orig_df[c("ApplNo", "Orig_App_Date")], by = "ApplNo") %>% # add original application approval date
+  filter(!is.na(Orig_App_Date)) %>% 
   mutate(DAY_DELAY = SubmissionStatusDate - Orig_App_Date) # create DAY_DELAY column
 
-# select only the original application and the first supplement for each ApplNo, regardless of supplement number
-# take the two DAY_DELAY values for each ApplNo that are the lowest
-survival_df <- survival_df %>% group_by(ApplNo) %>% top_n(-2, wt = DAY_DELAY) %>% ungroup()
+# select only efficacy supplements (SubmissionClassCodeID == 2)
+survival.df.orig <- survival_df %>% filter(SubmissionType == "ORIG") 
+survival.df.suppl <- survival_df %>% filter(SubmissionType == "SUPPL") %>% 
+  filter(SubmissionClassCodeID == 2)
+survival_df <- rbind(survival.df.orig, survival.df.suppl)
 
-# split the df by row 
-survival.df.orig <- survival_df %>% filter(SubmissionType == "ORIG") %>% select(-SubmissionNo, -SubmissionStatusDate, -DAY_DELAY, -SubmissionType)
-survival.df.suppl <- survival_df %>% filter(SubmissionType == "SUPPL") %>% select(-Orig_App_Date, -ApplType, -SponsorName, -NAME_EDIT, -EMPLOYEES, -ESTIMATED, -SubmissionType, -STOCK)
+# select only the original application and the first supplement for each ApplNo, regardless of supplement number
+# take the two DAY_DELAY values for each ApplNo that are the lowest. Break ties by submission number
+survival_df <- survival_df %>% 
+  group_by(ApplNo) %>% 
+  top_n(-2, wt = DAY_DELAY) %>% 
+  top_n(-2, wt = SubmissionNo) %>% 
+  ungroup()
+
+# split the df by submission type again
+survival.df.orig <- survival_df %>% filter(SubmissionType == "ORIG") %>% 
+  select(-SubmissionNo, -SubmissionStatusDate, -DAY_DELAY, -SubmissionType)
+survival.df.suppl <- survival_df %>% filter(SubmissionType == "SUPPL") %>% 
+  select(-Orig_App_Date, -ApplType, -SponsorName, -NAME_EDIT, -SubmissionType, -STOCK)
 
 # re-combine df by column
 new.survival <- left_join(survival.df.orig, survival.df.suppl, by = "ApplNo")
 new.survival <- new.survival %>% mutate(SURVIVAL = as.integer(!is.na(DAY_DELAY))) %>% 
-  mutate(NDA = as.integer(grepl("NDA", .$ApplType))) %>% select(-ApplType) %>%
-  mutate(ORIG_PRIORITY = as.integer(grepl("PRIORITY", .$ReviewPriority.x))) %>% select(-ReviewPriority.x) # create a review priority variable (original application)
+  mutate(NDA = as.integer(grepl("NDA", .$ApplType))) %>%  # Create an NDA variable
+  select(-ApplType) %>%
+  mutate(ORIG_PRIORITY = as.integer(grepl("PRIORITY", .$ReviewPriority.x))) %>% # create a review priority variable (original application)
+  select(-ReviewPriority.x) 
 
 # for products without supplements, calculate the number of days since original approval.
-# these are the censored values
+# these will be the censored values in the survival model
 new.survival[is.na(new.survival$DAY_DELAY),]$DAY_DELAY <- (Sys.Date()-new.survival[is.na(new.survival$DAY_DELAY),]$Orig_App_Date)
 
-# this df is a convenient format for finding products by company name while searching Owler
-search_df <- left_join(new.survival[,c("ApplNo", "SponsorName", "NAME_EDIT")], products[,c("ApplNo", "DrugName", "ActiveIngredient")], by = "ApplNo")
-
-new.products <- products %>% select(ApplNo, DrugName, ActiveIngredient) %>% unique()
+new.products <- products %>% 
+  select(ApplNo, DrugName, ActiveIngredient) %>% 
+  unique() 
 new.products$DrugName <- tolower(new.products$DrugName)
 new.products$ActiveIngredient <- tolower(new.products$ActiveIngredient)
-new.survival <- left_join(new.survival, new.products, by = "ApplNo")
 
-# financial data from Medtrack
-RandD <- read.csv('Medtrack/medtrack_RandD_edit.csv', header = TRUE, na.strings=c("","NA"))
-Finances <- read.csv('Medtrack/medtrack_Finances_edit.csv', header = TRUE, na.strings=c("","NA"))
+new.survival <- left_join(new.survival, new.products, by = "ApplNo") %>% group_by(ApplNo) %>% top_n(-1, wt = DrugName) %>% ungroup()
 
-medtrack_comb <- left_join(Finances, RandD[-1], by = "TICKER")
+# ---------------------------------- Company data from Medtrack -------------------------------------------
+# 
+# RandD <- read.csv('Medtrack/medtrack_RandD_edit.csv', header = TRUE, na.strings=c("","NA"))
+# Finances <- read.csv('Medtrack/medtrack_Finances_edit.csv', header = TRUE, na.strings=c("","NA"))
+# 
+# medtrack_comb <- left_join(Finances, RandD[-1], by = "TICKER")
+# 
+# surv.medtrack <- left_join(new.survival, medtrack_comb, by = c("STOCK" = "TICKER"))
+# 
+# # surv.medtrack <- unique(surv.medtrack) %>% 
+# #   filter(STOCK != "") 
+# 
+# surv.medtrack <- unique(surv.medtrack) 
+# 
+# surv.medtrack$NUM_EMPLOYEES <- as.numeric(sub(",", "",surv.medtrack$NUM_EMPLOYEES))
+# surv.medtrack$REVENUE <- as.numeric(sub(",", "",surv.medtrack$REVENUE))
+# 
+# # currency conversion table
+# FX_tbl <- read.csv("currency_table.csv", header = TRUE)
+# 
+# surv.medtrack <- left_join(surv.medtrack, FX_tbl, by = "FIN_CURRENCY")
+# 
+# surv.medtrack$MARKET_CAP <- as.numeric(sub(",", "",surv.medtrack$MARKET_CAP)) 
+# surv.medtrack$MARKET_CAP_FX <- surv.medtrack$MARKET_CAP * surv.medtrack$EX_RATE
 
-surv.medtrack <- left_join(new.survival, medtrack_comb, by = c("STOCK" = "TICKER"))
+# ---------------------------------- Add Bio Informa Data -------------------------------------------
 
-surv.medtrack <- unique(surv.medtrack) %>% 
-  filter(STOCK != "") %>% 
-  group_by(ApplNo) %>% 
-  top_n(-1, wt = SubmissionNo) %>% 
-  ungroup() 
-surv.medtrack$NUM_EMPLOYEES <- as.numeric(sub(",", "",surv.medtrack$NUM_EMPLOYEES))
-surv.medtrack$REVENUE <- as.numeric(sub(",", "",surv.medtrack$REVENUE))
+name_Appl <- new.survival %>% select(ApplNo, DrugName, ActiveIngredient) %>% distinct()
+name_Appl$DrugName <- str_remove(name_Appl$DrugName, "\\skit")
 
-# currency conversion table
+bio_informa <- read.csv("bioinforma_all_results2.csv", header = TRUE) %>%
+  select(-Likelihood_of_Approval, -Event_Phase, -Current_Phase, -Future_NDA_BLA_Date, -Future_PDUFA_Date)
 
-FX_tbl <- read.csv("currency_table.csv", header = TRUE)
+bio_informa$Actual_US_Approval_Date <- as.Date(bio_informa$Actual_US_Approval_Date, format = "%m/%d/%y")
+bio_informa$Drug_Name <- tolower(bio_informa$Drug_Name)
 
-surv.medtrack <- left_join(surv.medtrack, FX_tbl, by = "FIN_CURRENCY")
-surv.medtrack$MARKET_CAP <- as.numeric(sub(",", "",surv.medtrack$MARKET_CAP)) 
-surv.medtrack$MARKET_CAP_FX <- surv.medtrack$MARKET_CAP * surv.medtrack$EX_RATE
+bioinforma_index <- bio_informa %>% 
+  select(DrugID, Drug_Name, Generic_Name) %>% 
+  distinct()
 
-# ------------------------------------- Random Forest Survival -----------------------------------
+merged_index <- left_join(name_Appl, bioinforma_index, by = c("DrugName" = "Drug_Name"))
 
-# format new.survival data.frame for analysis
-df <- surv.medtrack %>% filter(!is.na(NUM_EMPLOYEES)) %>% 
-  filter(NUM_EMPLOYEES > 0) %>% # remove companies without employee values.
-  filter(DAY_DELAY >= 0) %>% # make sure DAY_DELAY is positive
-  filter(!is.na(REVENUE))
+# remove medical gasses and generic drugs. Not strictly necessary but made matching ApplNo and DrugID searching easier
+gas_rows <- filter(mutate(merged_index, gas = grepl("nitrogen|oxygen|carbon dioxide|medical air|nitrous oxide|helium", merged_index$DrugName)), gas == TRUE)
+merged_index <- anti_join(merged_index, gas_rows, by = "DrugName")
+generic_drugs <- merged_index[merged_index$DrugName == merged_index$ActiveIngredient,]
+merged_index <- anti_join(merged_index, generic_drugs, by = "DrugName")
+
+#export the merged_index to do some final ApplNo and DrugID matching manually
+#write.csv(merged_index, "merged_index.csv")
+
+#import manually edited merged_index_edit.csv
+merged_index_e <- read.csv("merged_index_edit.csv", header = TRUE) %>%
+  select(ApplNo, DrugID)
+
+merged_final <- rbind(merged_index %>% select(ApplNo, DrugID), merged_index_e)
+merged_final <- distinct(merged_final) %>% filter(!is.na(DrugID))
+
+# ---------------------------------- Add Bio Informa Company Data -------------------------------------------
+
+FX_tbl <- read.csv("currency_table.csv", header = TRUE) # foreign exchange table
+
+bio_informa_company <- read.csv("bioinforma_company_results.csv", header = TRUE) %>%
+  select(-Number.of.Employees.Qtr, -Number.of.Employees.TTM) %>%
+  mutate(Public = as.factor(grepl("Public", .$Company.Type..Public.Private.)))
+
+bio_informa_company <- left_join(bio_informa_company, FX_tbl, by = c("Currency" = "ABREV")) %>%
+  select(-FIN_CURRENCY, -Country, -Company.Type..Public.Private.) %>%
+  mutate(Market.Cap.FX = Market.Cap * EX_RATE)
+
+bio_informa_company2 <- read.csv("bioinforma_company_results2.csv", header = TRUE) %>%
+  left_join(FX_tbl, by = c("Currency" = "ABREV")) %>%
+  select(Company.ID, EX_RATE, EBITDA.Ann, Total.Revenue.Ann) %>%
+  mutate(EBITDA.FX = EBITDA.Ann * EX_RATE) %>%
+  mutate(Total.Revenue.FX = Total.Revenue.Ann * EX_RATE) %>%
+  select(Company.ID, EBITDA.FX, Total.Revenue.FX)
+bio_informa_company2[bio_informa_company2 == 0] <- NA
+
+bio_informa_company <- left_join(bio_informa_company, bio_informa_company2, by = "Company.ID") %>% distinct()
+
+
+# ---------------------------------- Combine Bio Informa and FDA Data -------------------------------------------
+
+merged.data <- left_join(new.survival, merged_final, by = "ApplNo")
+merged.data <- left_join(merged.data, bio_informa, by = "DrugID") 
+merged.data <- left_join(merged.data, bio_informa_company, by = c("LeadCompanyID" = "Company.ID")) %>% distinct()
+merged.data$LeadCompanyID <- as.factor(merged.data$LeadCompanyID)
+
+df <- merged.data %>% 
+  filter(Lead_Indication == "Y") %>% # only select the lead indication
+  filter(DAY_DELAY >= 0) # ensure DAY_DELAY is positive
+
+df <- left_join(df, as.data.frame(table(df$LeadCompanyID)), by = c("LeadCompanyID" = "Var1"))
+names(df)[length(names(df))] <- "Company_Drug_Count"
+
 df$DAY_DELAY <- as.integer(df$DAY_DELAY)
 df$SubmissionClassCodeID.x <- factor(df$SubmissionClassCodeID.x) # turn these columns into classification values rather than numbers
 df$SubmissionClassCodeID.y <- factor(df$SubmissionClassCodeID.y)
 df$NDA <- factor(df$NDA)
 df$ORIG_PRIORITY <- factor(df$ORIG_PRIORITY)
-str(df) # look at structure of data.frame
+
+levels(df$Route_of_Administration)[levels(df$Route_of_Administration) == ""] <- NA
+levels(df$Route_of_Administration)[levels(df$Route_of_Administration) == "N/A"] <- NA
+
+levels(df$Disease_Group)[levels(df$Disease_Group) == "Rheumatology (non autoimmune)" ] <- "Rheumatology"
+levels(df$Disease_Group)[levels(df$Disease_Group) == "Gastroenterology (non inflammatory bowel disease)" ] <- "Gastroenterology"
+
+levels(df$Drug_Classification)[levels(df$Drug_Classification) == "New Molecular Entity (NME)"] <- "NME"
+  
+# select columns for the model
+
+df <- df %>% 
+  select(ApplNo, DAY_DELAY, SURVIVAL, NDA, ORIG_PRIORITY, Disease_Group, Drug_Classification, 
+         Route_of_Administration, Country, SubmissionClassCodeID.x, 
+         Fast_Track, Public, Market.Cap.FX, Orphan, Company_Drug_Count)
+
+    # QIDP, Orphan, Total.Revenue.FX, EBITDA.FX, Number.of.Employees.Ann, SPA , 
+
+ df <- df %>%
+   mutate(Oral = as.factor(grepl("Oral|Sublingual", .$Route_of_Administration))) %>%
+   mutate(Other_ROA = as.factor(grepl("Inhaled|Intranasal|Intratracheal|Intravenous|Intraarticular|Intramuscular|Intradermal|Subcutaneous|Topical|Transdermal|Intracerebral|Intraocular|Intrathecal|Intratumoral|Intratympanic|Intrauterine|Intravaginal|Rectal|Surgical", .$Route_of_Administration)))
+
+   # mutate(Inhaled = as.factor(grepl("Inhaled|Intranasal", .$Route_of_Administration))) %>%
+   # mutate(IV = as.factor(grepl("Intravenous", .$Route_of_Administration))) %>%
+   # mutate(Oral = as.factor(grepl("Oral|Sublingual", .$Route_of_Administration))) %>%
+   # mutate(IM = as.factor(grepl("Intramuscular|Intradermal|Subcutaneous", .$Route_of_Administration))) %>%
+   # mutate(Topical = as.factor(grepl("Topical|Transdermal", .$Route_of_Administration))) %>%
+   # mutate(Other_ROA = as.factor(grepl("Intratracheal|Intraarticular|Intracerebral|Intraocular|Intrathecal|Intratumoral|Intratympanic|Intrauterine|Intravaginal|Rectal|Surgical", .$Route_of_Administration)))
+
+df$Route_of_Administration <- NULL
+
+# not sure if we need dummy columns. rfsurv should be able to split factors by levels.
+# df <- dummy_cols(df, select_columns = "Drug_Classification")#, remove_first_dummy = TRUE)
+# df <- dummy_cols(df, select_columns = c("Disease_Group", "Drug_Classification"))
+# df$Disease_Group <- NULL
+# df$Drug_Classification <- NULL
+
+df <- distinct(df) %>% select(-ApplNo)
+# ------------------------------------- Random Forest Survival -----------------------------------
 
 set.seed(1606) # set start point for random number generator
 
 # manually create test data
-training_row <- sample(round(nrow(df)*0.7, 0), replace = FALSE)
-training.data <- df[training_row, ] # select training data, 70% of all data.
+training_row <- sample(round(nrow(df)*1, 0), replace = FALSE)
+training.data <- df[training_row, ] # select training data, 80% of all data.
 test.data <- df[-training_row,]
 
-# rfimpute() # impute data if needed
-
-fit <- rfsrc(Surv(DAY_DELAY, SURVIVAL) ~ ORIG_PRIORITY + NDA + NUM_EMPLOYEES + RD_SPEND + MARKET_CAP_FX,
-             data = as.data.frame(training.data), ntree = 1000, mtry = 2,
+# FIT THE MODEL!
+fit <- rfsrc(Surv(DAY_DELAY, SURVIVAL) ~ ., data = as.data.frame(training.data), ntree = 1000,
              importance = TRUE, na.action = "na.impute")
+# nimpute = 3, samptype = "swr", mtry = 3
 plot(fit)
 fit
 
@@ -161,3 +263,7 @@ fit
 pred <- predict.rfsrc(fit, newdata = test.data, na.action = "na.impute")
 plot.survival(pred)
 pred
+
+yvar <- fit$yvar
+rsf.pred <- fit$predicted.oob
+rsf.err <- get.cindex(yvar$DAY_DELAY, yvar$SURVIVAL, rsf.pred)

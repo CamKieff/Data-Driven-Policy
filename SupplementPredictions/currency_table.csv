@@ -1,0 +1,19 @@
+FIN_CURRENCY,ABREV,EX_RATE
+US Dollar,USD,1
+Canadian Dollar,CAD,0.76
+Indian Rupee,INR,0.015
+South African Rand,ZAR,0.071
+Japanese Yen,JPY,0.0092
+German Deutschmark,,1.11
+Euro,EUR,1.11
+Israeli Shekel,ISL,0.28
+Swiss Franc,CHF,1.01
+British Pound,GBP,1.22
+South Korean Won,KRW,0.00085
+Danish Krone,DKK,0.15
+French Franc,,1.11
+Swedish Krona,SEK,0.11
+Russian Rouble,RUB,0.016
+Taiwan Dollar,NT$,0.032
+Australian Dollar,AUD,0.68
+Chinese Yuan,CNY,0.14
