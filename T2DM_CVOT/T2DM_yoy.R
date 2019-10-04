@@ -6,7 +6,9 @@ library(gridExtra)
 
 setwd("~/GitHub/Data-Driven-Policy/T2DM_CVOT")
 
-source("CTfunctions.R")
+source("CTfunctions.R") # load analysis and formatting functions
+
+# -------------------------- Load and Format Clinical Trial Data ------------------------------
 
 # list of filenames downloaded from ClinicalTrials.gov
 f <- c("Data/OtherTherapeuticAreas/2019-05-20-alzheimers.csv", 
@@ -40,18 +42,14 @@ f_obe <- CTformat(f[12]) %>% mutate(DISEASE = "Obesity")
 f_dep <- CTformat(f[13]) %>% mutate(DISEASE = "Depression")
 f_nep <- CTformat(f[14]) %>% mutate(DISEASE = "Nephropathy")
 
-
-# combine datasets and rename diseases (for graphing)
+# combine datasets
 f_all <- rbind(f_alz, f_anx, f_ast, f_dys, f_hiv, f_nash, f_nsclc, f_type1, f_type2, f_hyp, f_bre, f_obe, f_dep, f_nep)
 
 f_all %>% filter(INDUSTRY == TRUE) %>% group_by(START_DATE, DISEASE) %>% tally() -> f_diseases_ind # select industry
 f_all %>% filter(INDUSTRY == FALSE) %>% group_by(START_DATE, DISEASE) %>% tally() -> f_diseases_nind # select non-industry
 
-# f_diseases_ind$START_DATE <- as.Date(paste0(f_diseases_ind$START_DATE, "-01-01"))
-# f_diseases_nind$START_DATE <- as.Date(paste0(f_diseases_nind$START_DATE, "-01-01"))
-
-# bind hand extracted total intervetional clinical trials (phase 1,2,3) for industry 
-# and non-industry to f_diseases data.frames
+# bind hand-extracted total intervetional clinical trials (phase 1,2,3) for industry 
+# and non-industry to the f_diseases data.frames
 v1 <- c(474, 747, 1262, 1647, 2239, 2812, 3492, 3821, 4107, 4169, 4019, 4103, 3821, 3720, 4003, 3977, 3891, 3845) #industry 1,2,3
 v2 <- c(953, 1042, 1171, 1482, 1935, 2163, 2419, 2471, 2780, 2962, 3061, 3121, 3216, 3175, 3157, 3483, 3435, 3156) #non industry 123
 v1_dates <- as.Date(paste0(seq(from = 2000, to = 2017), "-01-01"))
@@ -62,9 +60,12 @@ names(f_v1) <- names(f_v2) <- names(f_diseases_ind) # rename columns
 f_diseases_ind <- bind_rows(f_diseases_ind, f_v1)
 f_diseases_nind <- bind_rows(f_diseases_nind, f_v2)
 
-#industry trials plotting
+# -------------------------------- Plotting --------------------------------------------------
+
+# Industry Trials
+
+#Diabetes only Data
 f_diseases_ind %>% filter(DISEASE == "Diabetes2") -> f_diseases_ind1
-f_diseases_ind %>% filter(DISEASE == "All Trials") -> f_diseases_ind2
 
 g1 <- (ggplot(f_diseases_ind1, aes(x=START_DATE, y = n)) 
        + geom_line(size = 1.3, color ="#f79017")
@@ -82,6 +83,10 @@ g1 <- (ggplot(f_diseases_ind1, aes(x=START_DATE, y = n))
                plot.title = element_text(size = 24), legend.text = element_text(size = 12),
                legend.title = element_text(size = 14))
 )
+
+# All Trials Data
+f_diseases_ind %>% filter(DISEASE == "All Trials") -> f_diseases_ind2
+
 g2 <- (ggplot(f_diseases_ind2, aes(x=START_DATE, y = n)) 
        + geom_line(size = 1.3)
        + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
@@ -99,9 +104,10 @@ g2 <- (ggplot(f_diseases_ind2, aes(x=START_DATE, y = n))
                legend.title = element_text(size = 14))
 )
 
-# non-industry trials plotting
+# Non-Industry Trials
+
+#Diabetes Only Data
 f_diseases_nind %>% filter(DISEASE == "Diabetes") -> f_diseases_nind3
-f_diseases_nind %>% filter(DISEASE == "All Trials") -> f_diseases_nind4
 
 g3 <- (ggplot(f_diseases_nind3, aes(x=START_DATE, y = n)) 
        + geom_line(size = 1.3, color = "#09a57e")
@@ -119,6 +125,9 @@ g3 <- (ggplot(f_diseases_nind3, aes(x=START_DATE, y = n))
                plot.title = element_text(size = 24), legend.text = element_text(size = 12),
                legend.title = element_text(size = 14))
 )
+
+# All Trials Data
+f_diseases_nind %>% filter(DISEASE == "All Trials") -> f_diseases_nind4
 
 g4 <- (ggplot(f_diseases_nind4, aes(x=START_DATE, y = n)) 
        + geom_line(size = 1.3)
@@ -139,12 +148,55 @@ g4 <- (ggplot(f_diseases_nind4, aes(x=START_DATE, y = n))
 
 grid.arrange(g1,g2,g3,g4, ncol=2) # plot all 4 graphs on a single graph. Probably could have done this with a facet wrap if the data was structured a bit differently.
 
-post_2008_ind <- yoy_stats(f_diseases_ind, time.period = "POST2008")
-pre_2008_ind <- yoy_stats(f_diseases_ind, time.period = "PRE2008")
-post_2008_nind <- yoy_stats(f_diseases_nind, time.period = "POST2008")
-pre_2008_nind <- yoy_stats(f_diseases_nind, time.period = "PRE2008")
+# Plot By Phase
+f_all %>% filter(INDUSTRY == TRUE) %>% group_by(START_DATE, DISEASE, PHASES) %>% tally() -> f_diseases_phases
+f_diseases_phases %>% filter(DISEASE == "Diabetes") -> f_diseases_phases1
 
-# Google Patent analysis
+g6 <- (ggplot(f_diseases_phases1, aes(x=START_DATE, y = n, color = PHASES)) 
+       + geom_line(size = 1.3)
+       + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
+                    color = "blue", linetype="dashed", size = 1 )
+       + scale_x_date(date_breaks = "1 year", date_labels = "'%y")
+       + labs(title = "Industry-Sponsored T2DM Clinical Trials by Phase")
+       + xlab("Trial Start Year")
+       + ylab("Number of Clinical Trials")
+       + ylim(0,max(f_diseases_phases1$n))
+       + theme_bw()
+       + scale_colour_brewer(palette = "Set2")
+       + theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), 
+               axis.line = element_line(colour = "black"), panel.border = element_blank(),
+               axis.text = element_text(size=14), axis.title = element_text(size=16), 
+               plot.title = element_text(size = 24), legend.text = element_text(size = 12),
+               legend.title = element_text(size = 14))
+)
+g6
+
+# Plot by Therapeutic Area
+f_diseases_ind %>% filter(DISEASE != "All Trials") -> f_diseases_TA
+f_diseases_TA %>% filter(DISEASE == "Diabetes2" | DISEASE == "Hypertension" | DISEASE == "BreastCancer" | DISEASE == "Obesity" | DISEASE == "Depression" | DISEASE == "Nephropathy") -> f_diseases_TA
+
+g7 <- (ggplot(f_diseases_TA, aes(x=START_DATE, y = n, color = DISEASE)) 
+       + geom_line(size = 1.3)
+       #+ facet_wrap(~ DISEASE, ncol = 4)
+       + geom_line(data = f_diseases_TA[f_diseases_TA$DISEASE == "Diabetes2",], size = 2) # bold diabetes line
+       + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
+                    color = "blue", linetype="dashed", size = 1 )
+       + scale_x_date(date_breaks = "1 year", date_labels = "'%y")
+       + labs(title = "Industry-Sponsored Clinical Trials by Therapeutic Area")
+       + xlab("Trial Start Year")
+       + ylab("Number of Clinical Trials")
+       + ylim(0,max(f_diseases_TA$n))
+       + theme_bw()
+       + scale_colour_brewer(palette = "Set2")
+       + theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), 
+               axis.line = element_line(colour = "black"), panel.border = element_blank(),
+               axis.text = element_text(size=14), axis.title = element_text(size=16), 
+               plot.title = element_text(size = 24), legend.text = element_text(size = 12),
+               legend.title = element_text(size = 14))
+)
+g7
+
+# --------------------------------Google Patent analysis--------------------------------------
 
 patents <- read.csv("data/2019-01-24_T2DM_google_patent_count.csv", header = TRUE)
 patents$YEAR <- as.Date(paste0(patents$YEAR, "-01-01"))
@@ -168,51 +220,12 @@ g5 <- (ggplot(patents, aes(x=YEAR, y = Type2Diabetes))
 )
 g5
 
-# plot of clinical trial data by phase
-f_all %>% filter(INDUSTRY == TRUE) %>% group_by(START_DATE, DISEASE, PHASES) %>% tally() -> f_diseases_phases
-f_diseases_phases %>% filter(DISEASE == "Diabetes") -> f_diseases_phases1
-g6 <- (ggplot(f_diseases_phases1, aes(x=START_DATE, y = n, color = PHASES)) 
-       + geom_line(size = 1.3)
-       + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
-                    color = "blue", linetype="dashed", size = 1 )
-       + scale_x_date(date_breaks = "1 year", date_labels = "'%y")
-       + labs(title = "Industry-Sponsored T2DM Clinical Trials by Phase")
-       + xlab("Trial Start Year")
-       + ylab("Number of Clinical Trials")
-       + ylim(0,max(f_diseases_phases1$n))
-       + theme_bw()
-       + scale_colour_brewer(palette = "Set2")
-       + theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), 
-               axis.line = element_line(colour = "black"), panel.border = element_blank(),
-               axis.text = element_text(size=14), axis.title = element_text(size=16), 
-               plot.title = element_text(size = 24), legend.text = element_text(size = 12),
-               legend.title = element_text(size = 14))
-)
-g6
+# --------------------------------------- Statistics -----------------------------------------
 
-# Plot by therapeutic area, including non diabetes drugs
-f_diseases_ind %>% filter(DISEASE != "All Trials") -> f_diseases_TA
-f_diseases_TA %>% filter(DISEASE == "Diabetes2" | DISEASE == "Hypertension" | DISEASE == "BreastCancer" | DISEASE == "Obesity" | DISEASE == "Depression" | DISEASE == "Nephropathy") -> f_diseases_TA
-g7 <- (ggplot(f_diseases_TA, aes(x=START_DATE, y = n, color = DISEASE)) 
-       + geom_line(size = 1.3)
-       #+ facet_wrap(~ DISEASE, ncol = 4)
-       + geom_line(data = f_diseases_TA[f_diseases_TA$DISEASE == "Diabetes2",], size = 2) # bold diabetes line
-       + geom_vline(aes(xintercept=as.Date("2008-12-01")), 
-                    color = "blue", linetype="dashed", size = 1 )
-       + scale_x_date(date_breaks = "1 year", date_labels = "'%y")
-       + labs(title = "Industry-Sponsored Clinical Trials by Therapeutic Area")
-       + xlab("Trial Start Year")
-       + ylab("Number of Clinical Trials")
-       + ylim(0,max(f_diseases_TA$n))
-       + theme_bw()
-       + scale_colour_brewer(palette = "Set2")
-       + theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), 
-               axis.line = element_line(colour = "black"), panel.border = element_blank(),
-               axis.text = element_text(size=14), axis.title = element_text(size=16), 
-               plot.title = element_text(size = 24), legend.text = element_text(size = 12),
-               legend.title = element_text(size = 14))
-)
-g7
+post_2008_ind <- yoy_stats(f_diseases_ind, time.period = "POST2008")
+pre_2008_ind <- yoy_stats(f_diseases_ind, time.period = "PRE2008")
+post_2008_nind <- yoy_stats(f_diseases_nind, time.period = "POST2008")
+pre_2008_nind <- yoy_stats(f_diseases_nind, time.period = "PRE2008")
 
 f_diseases_phases %>% 
         filter(PHASES == "Phase 1") %>%

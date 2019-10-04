@@ -1,0 +1,827 @@
+,ApplNo,DrugName,ActiveIngredient,DrugID,Generic_Name
+1,21746,surfaxin,lucinactant,1790,lucinactant
+2,21876,diclegis,doxylamine succinate; pyridoxine hydrochloride,22272,doxylamine succinate/pyridoxine hydrochloride
+3,21883,dalvance,dalbavancin hydrochloride,621,dalbavancin hydrochloride
+4,21936,spiriva respimat,tiotropium bromide,2380,tiotropium bromide
+5,21951,absorica,isotretinoin,8157,isotretinoin
+6,22018,lamivudine and zidovudine,lamivudine; zidovudine,NA,NA
+7,22063,mydayis,amphetamine aspartate; amphetamine sulfate; dextroamphetamine saccharate; dextroamphetamine sulfate,2754,
+8,22141,cimduo,lamivudine; tenofovir disoproxil fumarate,37494,Tenofovir Disoproxil Fumarate and Lamivudine
+9,22142,symfi,efavirenz; lamivudine; tenofovir disoproxil fumarate,37748,"efavirenz, lamivudine tenofovir disoproxil fumarate"
+10,22175,pertzye,pancrelipase (amylase;lipase;protease),22398,pancrelipase
+11,22200,bydureon,exenatide synthetic,200,exenatide
+12,22200,bydureon pen,exenatide synthetic,NA,NA
+13,22205,giazo,balsalazide disodium,7783,
+14,22219,aveed,testosterone undecanoate,2785,testosterone undecanoate
+15,22222,ultresa,pancrelipase (amylase;lipase;protease),8158,pancrelipase
+16,22225,bridion,sugammadex sodium,8563,sugammadex
+17,22247,duavee,"bazedoxifene acetate; estrogens, conjugated",105,bazedoxifene and estrogens (conjugated)
+18,22252,natazia,dienogest; estradiol valerate,16751,estradiol valerate/dienogest
+19,22259,tolak,fluorouracil,31992,fluorouracil
+20,22271,nesina,alogliptin benzoate,2687,alogliptin
+21,22279,hycofenix,guaifenesin; hydrocodone bitartrate; pseudoephedrine hydrochloride,NA,NA
+22,22283,zegerid otc,omeprazole; sodium bicarbonate,NA,NA
+23,22343,"efavirenz, lamivudine and tenofovir disoproxil fumarate",efavirenz; lamivudine; tenofovir disoproxil fumarate,NA,NA
+24,22344,lamivudine and tenofovir disoproxil fumarate,lamivudine; tenofovir disoproxil fumarate,NA,NA
+25,22396,dyloject,diclofenac sodium,8081,diclofenac sodium
+26,22407,vibativ,telavancin,1810,telavancin
+27,22416,aptiom,eslicarbazepine acetate,9831,eslicarbazepine acetate
+28,22424,flowtuss,guaifenesin; hydrocodone bitartrate,NA,NA
+29,22426,oseni,alogliptin benzoate; pioglitazone hydrochloride,15291,alogliptin/pioglitazone
+30,22445,sustol,granisetron,8118,granisetron
+31,22458,elelyso,taliglucerase alfa,8095,taliglucerase alfa
+32,22472,afrezza,insulin recombinant human,2214,insulin
+33,22517,nocdurna,desmopressin acetate,21226,desmopressin acetate
+34,22526,addyi,flibanserin,12590,flibanserin
+35,22529,belviq,lorcaserin hydrochloride,1830,lorcaserin hydrochloride
+36,22535,esbriet,pirfenidone,1399,pirfenidone
+37,22542,viokace,pancrelipase (amylase;lipase;protease),19626,pancrelipase
+38,22549,adasuve,loxapine,2896,loxapine
+39,22556,karbinal er,carbinoxamine maleate,22240,carbinoxamine maleate
+40,22572,mitosol,mitomycin,19530,mitomycin/mannitol
+41,22577,viread,tenofovir disoproxil fumarate,327,tenofovir disoproxil fumarate
+42,22580,qsymia,phentermine hydrochloride; topiramate,2653,phentermine and topiramate
+43,125294,granix,tbo-filgrastim,16144,"Tbo-filgrastim, granulocyte colony-stimulating factor"
+44,125327,voraxaze,glucarpidase,3047,glucarpidase
+45,125390,myalept,metreleptin,16497,metreleptin
+46,125409,perjeta,pertuzumab,81,pertuzumab
+47,125418,zaltrap,ziv-aflibercept,721,ziv-aflibercept
+48,125422,jetrea,ocriplasmin,16059,ocriplasmin
+49,125427,kadcyla,ado-trastuzumab emtansine,547,ado-trastuzumab emtansine
+50,125431,tanzeum,albiglutide,NA,NA
+51,125433,simponi aria,golimumab,20608,golimumab
+52,125460,vimizim,elosulfase alfa,14777,elosulfase alfa
+53,125469,trulicity,dulaglutide,9921,dulaglutide
+54,125472,actemra,tocilizumab,2424,tocilizumab
+55,125476,entyvio,vedolizumab,78,vedolizumab
+56,125477,cyramza,ramucirumab,1858,ramucirumab
+57,125486,gazyva,obinutuzumab,11082,obinutuzumab
+58,125496,sylvant,siltuximab,7938,siltuximab
+59,125499,plegridy,peginterferon beta-1a,14158,peginterferon beta-1a
+60,125504,cosentyx,secukinumab,14715,secukinumab
+61,125509,anthim,obiltoxaximab,18772,obiltoxaximab
+62,125511,natpara,parathyroid hormone,272,parathyroid hormone 1-84
+63,125513,strensiq,asfotase alfa,17360,asfotase alfa
+64,125514,keytruda,pembrolizumab,19200,pembrolizumab
+65,125516,unituxin,dinutuximab,18669,dinutuximab
+66,125521,taltz,ixekizumab,14735,ixekizumab
+67,125522,repatha,evolocumab,16091,evolocumab
+68,125526,nucala,mepolizumab,2476,mepolizumab
+69,125527,opdivo,nivolumab,2769,nivolumab
+70,125544,inflectra,infliximab-dyyb,19637,infliximab-dyyb
+71,125545,retacrit,epoetin alfa-epbx,19299,epoetin zeta
+72,125547,portrazza,necitumumab,2302,necitumumab
+73,125553,zarxio,filgrastim-sndz,19348,filgrastim-sndz
+74,125554,opdivo,nivolumab,2769,nivolumab
+75,125557,blincyto,blinatumomab,725,blinatumomab
+76,125559,praluent,alirocumab,16259,alirocumab
+77,125561,kanuma,sebelipase alfa,18161,sebelipase alfa
+78,200063,contrave,bupropion hydrochloride; naltrexone hydrochloride,2875,bupropion and naltrexone
+79,200153,liptruzet,atorvastatin calcium; ezetimibe,NA,NA
+80,200656,perikabiven in plastic container,amino acids; calcium chloride; dextrose; magnesium sulfate; potassium chloride; sodium acetate; sodium glycerophosphate; soybean oil,NA,NA
+81,200656,kabiven in plastic container,amino acids; calcium chloride; dextrose; magnesium sulfate; potassium chloride; sodium acetate; sodium glycerophosphate; soybean oil,NA,NA
+82,200671,durlaza,aspirin,21320,
+83,200677,signifor,pasireotide diaspartate,1888,pasireotide diaspartate
+84,200740,cystaran,cysteamine hydrochloride,8427,cysteamine hydrochloride
+85,201281,jentadueto,linagliptin; metformin hydrochloride,17965,linagliptin and metformin
+86,201292,gilotrif,afatinib dimaleate,8414,afatinib
+87,201635,trokendi xr,topiramate,17793,topiramate
+88,201656,noctiva,desmopressin acetate,16127,desmopressin acetate
+89,201688,tobi podhaler,tobramycin,2355,tobramycin
+90,201739,auvi-q,epinephrine,18686,Epinephrine
+91,201803,advil,ibuprofen sodium,NA,NA
+92,201820,bethkis,tobramycin,21356,tobramycin inhalation solution (generic)
+93,201849,glucagon,glucagon hydrochloride,NA,NA
+94,201922,ximino,minocycline hydrochloride,26620,Minocycline HCL
+95,201923,iluvien,fluocinolone acetonide,16220,fluocinolone acetonide
+96,202008,amyvid,florbetapir f-18,20703,florbetapir F 18
+97,202020,rayos,prednisone,17038,prednisone
+98,202057,vascepa,icosapent ethyl,1008,icosapent ethyl
+99,202088,suprenza,phentermine hydrochloride,NA,NA
+100,202091,suprax,cefixime,NA,NA
+101,202100,quillivant xr,methylphenidate hydrochloride,18207,methylphenidate hydrochloride
+102,202106,meropenem and sodium chloride in duplex container,meropenem,NA,NA
+103,202107,korlym,mifepristone,1683,mifepristone
+104,202129,zetonna,ciclesonide,11152,ciclesonide
+105,202153,ruby-fill,rubidium chloride rb-82,NA,NA
+106,202155,eliquis,apixaban,2962,apixaban
+107,202158,radiogenix system,technetium tc-99m sodium pertechnetate generator,NA,NA
+108,202207,lymphoseek,technetium tc-99m tilmanocept,8015,technetium Tc 99m tilmanocept
+109,202211,oxytrol for women,oxybutynin,22052,oxybutynin
+110,202236,dymista,azelastine hydrochloride; fluticasone propionate,18131,azelastine hydrochloride and fluticasone propionate
+111,202270,janumet xr,metformin hydrochloride; sitagliptin phosphate,15574,sitagliptin/metformin
+112,202276,stendra,avanafil,969,avanafil
+113,202278,zecuity,sumatriptan succinate,NA,NA
+114,202292,mytesi,crofelemer,17570,crofelemer
+115,202293,farxiga,dapagliflozin,3046,dapagliflozin
+116,202317,valchlor,mechlorethamine hydrochloride,17355,mechlorethamine
+117,202324,inlyta,axitinib,2195,axitinib
+118,202344,binosto,alendronate sodium,14178,alendronate
+119,202428,fabior,tazarotene,NA,NA
+120,202450,tudorza pressair,aclidinium bromide,2622,aclidinium bromide
+121,202497,marqibo,vincristine sulfate,1481,vincristine sulfate
+122,202514,zioptan,tafluprost,14998,tafluprost
+123,202535,prepopik,citric acid; magnesium oxide; sodium picosulfate,27448,"sodium picosulphate, magnesium oxide, citric acid"
+124,202611,myrbetriq,mirabegron,8309,mirabegron
+125,202667,cosopt pf,dorzolamide hydrochloride; timolol maleate,NA,NA
+126,202714,kyprolis,carfilzomib,9588,carfilzomib
+127,202736,sklice,ivermectin,19513,ivermectin
+128,202788,subsys,fentanyl,17556,
+129,202799,omontys preservative free,peginesatide acetate,NA,NA
+130,202799,omontys,peginesatide acetate,NA,NA
+131,202806,tafinlar,dabrafenib mesylate,16782,dabrafenib
+132,202810,oxtellar xr,oxcarbazepine,17794,oxcarbazepine
+133,202811,linzess,linaclotide,8466,linaclotide acetate
+134,202813,qnasl,beclomethasone dipropionate,NA,NA
+135,202832,sodium chloride 0.9% in plastic container,sodium chloride,NA,NA
+136,202832,sodium chloride 0.9%,sodium chloride,NA,NA
+137,202833,picato,ingenol mebutate,14102,ingenol mebutate
+138,202834,fycompa,perampanel,2066,perampanel
+139,202872,lotemax,loteprednol etabonate,24673,loteprednol etabonate
+140,202880,zohydro er,hydrocodone bitartrate,17288,hydrocodone bitartrate
+141,202971,abilify maintena,aripiprazole,19041,aripiprazole
+142,202992,aubagio,teriflunomide,2068,teriflunomide
+143,203085,stivarga,regorafenib,15117,regorafenib
+144,203093,vitekta,elvitegravir,NA,NA
+145,203094,tybost,cobicistat,13480,cobicistat
+146,203100,stribild,cobicistat; elvitegravir; emtricitabine; tenofovir disoproxil fumarate,13579,
+147,203108,striverdi respimat,olodaterol hydrochloride,12092,Olodaterol
+148,203109,revatio,sildenafil citrate,1557,sildenafil citrate
+149,203137,vizamyl,flutemetamol f-18,20663,
+150,203159,skyla,levonorgestrel,21274,
+151,203168,prolensa,bromfenac sodium,18912,bromfenac sodium
+152,203188,kalydeco,ivacaftor,2643,ivacaftor
+153,203195,suprax,cefixime,NA,NA
+154,203202,northera,droxidopa,3070,droxidopa
+155,203214,xeljanz,tofacitinib citrate,10177,tofacitinib citrate
+156,203255,signifor lar,pasireotide pamoate,1888,pasireotide diaspartate
+157,203284,ravicti,glycerol phenylbutyrate,16393,glycerol phenylbutyrate
+158,203312,rytary,carbidopa; levodopa,15820,carbidopa/levodopa
+159,203313,ryzodeg 70/30,insulin aspart; insulin degludec,2546,insulin degludec and insulin aspart
+160,203314,tresiba,insulin degludec,10482,degludec
+161,203324,photrexa,riboflavin 5'-phosphate sodium,25417,riboflavin
+162,203324,photrexa viscous in dextran 20%,riboflavin 5'-phosphate sodium,NA,NA
+163,203341,bosulif,bosutinib monohydrate,2994,bosutinib
+164,203388,erivedge,vismodegib,10934,vismodegib
+165,203389,procysbi,cysteamine bitartrate,15906,cysteamine bitartrate
+166,203414,kazano,alogliptin benzoate; metformin hydrochloride,19098,alogliptin and metformin
+167,203415,xtandi,enzalutamide,8138,enzalutamide
+168,203441,gattex,teduglutide recombinant,698,teduglutide
+169,203469,iclusig,ponatinib hydrochloride,10582,ponatinib
+170,203479,versacloz,clozapine,NA,NA
+171,203491,ilevro,nepafenac,18145,nepafenac
+172,203496,orenitram,treprostinil diolamine,6616,treprostinil diolamine
+173,203505,osphena,ospemifene,9870,ospemifene
+174,203565,injectafer,ferric carboxymaltose,7954,ferric carboxymaltose
+175,203567,jublia,efinaconazole,18703,efinaconazole
+176,203568,kynamro,mipomersen sodium,NA,NA
+177,203585,synribo,omacetaxine mepesuccinate,2356,omacetaxine mepesuccinate
+178,203595,suclear,magnesium sulfate; polyethylene glycol 3350; potassium chloride; potassium sulfate; sodium bicarbonate; sodium chloride; sodium sulfate,NA,NA
+179,203634,uceris,budesonide,17196,Budesonide
+180,203667,minastrin 24 fe,ethinyl estradiol; norethindrone acetate,23062,Norethindrone Acetate; Ethinyl Estradiol; Ferrous Fumarate
+181,203684,lumason,sulfur hexafluoride lipid-type a microspheres,35880,sulfur hexafluoride
+182,203696,lupaneta pack,leuprolide acetate; norethindrone acetate,NA,NA
+183,203697,vazalore,aspirin,NA,NA
+184,203752,minivelle,estradiol,21469,
+185,203756,cometriq,cabozantinib s-malate,2338,cabozantinib
+186,203791,sitavig,acyclovir,20306,acyclovir
+187,203794,nucynta,tapentadol hydrochloride,7721,tapentadol immediate release (IR)
+188,203858,juxtapid,lomitapide mesylate,2796,lomitapide medylate
+189,203952,duopa,carbidopa; levodopa,18418,levodopa/carbidopa
+190,203971,xofigo,radium ra-223 dichloride,17457,radium Ra 223 dichloride
+191,203975,anoro ellipta,umeclidinium bromide; vilanterol trifenatate,17103,umeclidinium bromide/vilanterol trifenatate
+192,203985,afinitor disperz,everolimus,10571,everolimus
+193,203993,onfi,clobazam,11696,clobazam
+194,204026,pomalyst,pomalidomide,399,pomalidomide
+195,204031,xartemis xr,acetaminophen; oxycodone hydrochloride,21734,oxycodone and acetaminophen
+196,204042,invokana,canagliflozin,13681,canagliflozin
+197,204061,quartette,ethinyl estradiol; levonorgestrel,18688,levonorgestrel and ethinyl estradiol
+198,204063,tecfidera,dimethyl fumarate,320,dimethyl fumarate
+199,204078,bloxiverz,neostigmine methylsulfate,22434,neostigmine methylsulfate
+200,204096,astagraf xl,tacrolimus,3078,tacrolimus
+201,204114,mekinist,trametinib dimethyl sulfoxide,16817,trametinib
+202,204119,"efavirenz, lamivudine, and tenofovir disoproxil fumarate",efavirenz;lamivudine;tenofovir disoproxil fumarate,NA,NA
+203,204141,topicort,desoximetasone,22299,desoximetasone
+204,204153,luzu,luliconazole,24638,luliconazole 1%
+205,204168,fetzima,levomilnacipran hydrochloride,14152,
+206,204200,adrenalin,epinephrine,NA,NA
+207,204251,simbrinza,brimonidine tartrate; brinzolamide,18803,brinzolamide/brimonidine tartrate
+208,204275,breo ellipta,fluticasone furoate; vilanterol trifenatate,3248,fluticasone furoate/vilanterol trifenatate
+209,204286,naftin,naftifine hydrochloride,NA,NA
+210,204300,vazculep,phenylephrine hydrochloride,22435,phenylephrine hydrochloride
+211,204307,vituz,chlorpheniramine maleate; hydrocodone bitartrate,21974,hydrocodone bitartrate; chlorpheniramine maleate
+212,204308,epaned,enalapril maleate,23059,
+213,204311,abacavir and lamivudine,abacavir;lamivudine,25001,abacavir and lamivudine
+214,204325,adzenys er,amphetamine,26267,amphetamine XR
+215,204326,adzenys xr-odt,amphetamine,23867,amphetamine polistirex
+216,204353,invokamet,canagliflozin; metformin hydrochloride,17166,canagliflozin / immediate release metformin
+217,204369,stivarga,regorafenib,15117,regorafenib
+218,204370,vraylar,cariprazine hydrochloride,3054,cariprazine hydrochloride
+219,204384,sirturo,bedaquiline fumarate,15452,bedaquiline
+220,204399,vogelxo,testosterone,24196,testosterone
+221,204412,delzicol,mesalamine,21826,mesalamine
+222,204417,elepsia xr,levetiracetam,25562,levetiracetam
+223,204426,taytulla,ethinyl estradiol; norethindrone acetate,22325,Norethindrone Acetate; Ethinyl Estradiol; Ferrous Fumarate
+224,204427,kerydin,tavaborole,8098,tavaborole
+225,204441,jynarque,tolvaptan,38056,tolvaptan
+226,204442,probuphine,buprenorphine hydrochloride,2877,buprenorphine hydrochloride
+227,204447,trintellix,vortioxetine hydrobromide,8410,vortioxetine
+228,204485,vasostrict,vasopressin,24914,
+229,204508,clinolipid 20%,olive oil; soybean oil,NA,NA
+230,204516,brisdelle,paroxetine mesylate,8366,
+231,204553,colprep,magnesium sulfate; potassium sulfate; sodium sulfate,NA,NA
+232,204568,"efavirenz, lamivudine, and tenofovir disoproxil fumarate",efavirenz;lamivudine;tenofovir disoproxil fumarate,NA,NA
+233,204569,belsomra,suvorexant,14388,suvorexant
+234,204592,zorvolex,diclofenac,21750,diclofenac
+235,204623,pennsaid,diclofenac sodium,20699,diclofenac sodium
+236,204629,jardiance,empagliflozin,12058,empagliflozin
+237,204630,provayblue,methylene blue,NA,NA
+238,204640,adrenalin,epinephrine,NA,NA
+239,204654,lo minastrin fe,ethinyl estradiol; norethindrone acetate,22400,Norethindrone Acetate; Ethinyl Estradiol; Ferrous Fumarate
+240,204655,nexium 24hr,esomeprazole magnesium,NA,NA
+241,204671,sovaldi,sofosbuvir,16284,sofosbuvir
+242,204677,neuraceq,florbetaben f-18,20857,
+243,204683,khedezla,desvenlafaxine,23056,desvenlafaxine
+244,204684,impavido,miltefosine,988,miltefosine
+245,204708,mirvaso,brimonidine tartrate,3031,brimonidine tartrate
+246,204734,fosrenol,lanthanum carbonate,1789,lanthanum carbonate
+247,204736,aciphex sprinkle,rabeprazole sodium,40269,rabeprazole sodium delayed-release
+248,204760,movantik,naloxegol oxalate,6019,naloxegol
+249,204768,tivorbex,indomethacin,21748,
+250,204781,dotarem,gadoterate meglumine,21864,Gadoterate meglumine injection
+251,204790,tivicay,dolutegravir sodium,15003,dolutegravir
+252,204819,adempas,riociguat,7614,riociguat
+253,204820,mitigare,colchicine,25256,colchicine
+254,204822,izba,travoprost,19995,travoprost
+255,204824,otrexup,methotrexate,17848,methotrexate
+256,204824,otrexup pfs,methotrexate,NA,NA
+257,204886,zontivity,vorapaxar sulfate,2633,vorapaxar
+258,204915,abacavir and lamivudine,abacavir;lamivudine,25001,abacavir and lamivudine
+259,204977,omtryg,omega-3-acid ethyl esters type a,19633,
+260,205003,prestalia,amlodipine besylate; perindopril arginine,19730,perindopril arginine/amlodipine besylate
+261,205053,noxafil,posaconazole,1919,posaconazole
+262,205060,epanova,omega-3-carboxylic acids,NA,NA
+263,205065,kuvan,sapropterin dihydrochloride,789,sapropterin dihydrochloride
+264,205098,varithena,polidocanol,18569,
+265,205103,yosprala,aspirin; omeprazole,NA,NA
+266,205108,sotylize,sotalol hydrochloride,30832,sotalol hydrochloride
+267,205109,velphoro,sucroferric oxyhydroxide,17719,sucroferric oxyhydroxide
+268,205122,qudexy xr,topiramate,16885,topiramate
+269,205123,olysio,simeprevir sodium,8537,simeprevir
+270,205175,ecoza,econazole nitrate,NA,NA
+271,205223,nuvessa,metronidazole,NA,NA
+272,205266,odomzo,sonidegib phosphate,16686,sonidegib
+273,205352,aleve pm,diphenhydramine hydrochloride; naproxen sodium,NA,NA
+274,205353,farydak,panobinostat lactate,2362,panobinostat lactate
+275,205382,incruse ellipta,umeclidinium bromide,17104,umeclidinium bromide
+276,205383,oraltag,iohexol,NA,NA
+277,205388,omidria,ketorolac tromethamine; phenylephrine hydrochloride,15939,phenylephrine/ketorolac
+278,205395,prezcobix,cobicistat; darunavir ethanolate,18497,cobicistat/darunavir
+279,205410,hemangeol,propranolol hydrochloride,21739,propranolol hydrochloride
+280,205422,rexulti,brexpiprazole,17110,brexpiprazole
+281,205425,lopinavir and ritonavir,lopinavir;ritonavir,NA,NA
+282,205433,kitabis pak,tobramycin,NA,NA
+283,205434,flonase allergy relief,fluticasone propionate,NA,NA
+284,205435,sivextro,tedizolid phosphate,10979,tedizolid phosphate
+285,205437,otezla,apremilast,402,apremilast
+286,205474,obredon,guaifenesin; hydrocodone bitartrate,NA,NA
+287,205488,natesto,testosterone,18918,testosterone
+288,205489,cotempla xr-odt,methylphenidate,23866,methylphenidate
+289,205494,cerdelga,eliglustat tartrate,1360,eliglustat tartrate
+290,205525,syndros,dronabinol,23581,dronabinol
+291,205551,triumeq,abacavir sulfate; dolutegravir sodium; lamivudine,17950,abacavir; dolutegravir; lamivudine
+292,205552,imbruvica,ibrutinib,14596,ibrutinib
+293,205555,steritalc,talc,NA,NA
+294,205579,ryanodex,dantrolene sodium,23877,
+295,205580,belrapzo,bendamustine hydrochloride,24236,bendamustine hydrochloride
+296,205596,noxafil,posaconazole,1919,posaconazole
+297,205598,macrilen,macimorelin acetate,12346,macimorelin acetate
+298,205613,uceris,budesonide,17196,Budesonide
+299,205625,arnuity ellipta,fluticasone furoate,17356,fluticasone furoate
+300,205626,"lamivudine, nevirapine and zidovudine",lamivudine; nevirapine; zidovudine,NA,NA
+301,205636,proair respiclick,albuterol sulfate,23820,albuterol
+302,205636,proair digihaler,albuterol sulfate,39843,albuterol
+303,205637,bunavail,buprenorphine hydrochloride; naloxone hydrochloride,19034,buprenorphine/naloxone
+304,205641,asmanex hfa,mometasone furoate,2389,mometasone furoate
+305,205649,xigduo xr,dapagliflozin; metformin hydrochloride,10496,
+306,205677,hetlioz,tasimelteon,2672,tasimelteon
+307,205692,basaglar,insulin glargine,17839,insulin glargine
+308,205703,esmolol hydrochloride in plastic container,esmolol hydrochloride,NA,NA
+309,205703,esmolol hydrochloride double strength in plastic container,esmolol hydrochloride,NA,NA
+310,205704,"nitrious oxide, usp",nitrious oxide,NA,NA
+311,205718,akynzeo,netupitant; palonosetron hydrochloride,17831,netupitant and palonosetron
+312,205739,veltassa,patiromer sorbitex calcium,17220,patiromer
+313,205747,humalog kwikpen,insulin lispro recombinant,NA,NA
+314,205750,cholbam,cholic acid,23338,cholic acid
+315,205755,zykadia,ceritinib,18443,ceritinib
+316,205776,rasuvo,methotrexate,NA,NA
+317,205777,targiniq,naloxone hydrochloride; oxycodone hydrochloride,NA,NA
+318,205786,isentress,raltegravir potassium,2427,raltegravir
+319,205787,evzio,naloxone hydrochloride,23925,naloxone hydrochloride
+320,205831,aptensio xr,methylphenidate hydrochloride,28496,methylphenidate
+321,205832,ofev,nintedanib esylate,8415,nintedanib
+322,205834,harvoni,ledipasvir; sofosbuvir,20728,sofosbuvir/ledipasvir
+323,205836,briviact,brivaracetam,8072,brivaracetam
+324,205837,briviact,brivaracetam,8072,brivaracetam
+325,205838,briviact,brivaracetam,8072,brivaracetam
+326,205858,zydelig,idelalisib,15282,idelalisib
+327,205861,efavirenz; lamivudine; tenofovir disoproxil fumarate,efavirenz;lamivudine;tenofovir disoproxil fumarate,NA,NA
+328,205874,auryxia,ferric citrate,2571,ferric citrate
+329,205879,invokamet xr,canagliflozin; metformin hydrochloride,21769,canagliflozin / extended release metformin
+330,205919,purixan,mercaptopurine,24031,mercaptopurine
+331,205920,primatene mist,epinephrine,18622,epinephrine
+332,205931,acticlate,doxycycline hyclate,32276,doxycycline hyclate USP
+333,206030,carnexiv,carbamazepine,11701,carbamazepine
+334,206038,orkambi,ivacaftor; lumacaftor,9964,lumacaftor; ivacaftor
+335,206040,lamivudine; zidovudine; efavirenz,lamivudine;zidovudine;efavirenz,NA,NA
+336,206073,glyxambi,empagliflozin; linagliptin,18861,empagliflozin and linagliptin
+337,206088,otezla,apremilast,402,apremilast
+338,206099,onzetra xsail,sumatriptan succinate,22579,Sumatriptan
+339,206111,synjardy,empagliflozin; metformin hydrochloride,23643,empagliflozin/metformin hydrochloride
+340,206143,corlanor,ivabradine hydrochloride,17290,ivabradine hydrochloride
+341,206162,lynparza,olaparib,5962,olaparib
+342,206185,xelpros,latanoprost,22445,latanoprost
+343,206192,cotellic,cobimetinib fumarate,5747,cobimetinib
+344,206229,liletta,levonorgestrel,25173,levonorgestrel
+345,206255,soolantra,ivermectin,23887,ivermectin
+346,206256,beleodaq,belinostat,1941,belinostat (IV)
+347,206276,pazeo,olopatadine hydrochloride,19438,olopatadine hydrochloride
+348,206302,byvalson,nebivolol hydrochloride; valsartan,21648,nebivolol and valsartan
+349,206307,xtoro,finafloxacin,19434,finafloxacin
+350,206316,savaysa,edoxaban tosylate,2736,edoxaban
+351,206317,triferic,ferric pyrophosphate citrate,18141,ferric pyrophosphate
+352,206321,saxenda,liraglutide recombinant,NA,NA
+353,206323,tuxarin er,chlorpheniramine maleate; codeine phosphate,NA,NA
+354,206333,kybella,deoxycholic acid,17959,sodium deoxycholate
+355,206334,orbactiv,oritavancin diphosphate,1400,oritavancin
+356,206352,reyataz,atazanavir sulfate,2130,atazanavir sulfate
+357,206356,orfadin,nitisinone,17395,nitisinone
+358,206406,envarsus xr,tacrolimus,17456,tacrolimus
+359,206426,rapivab,peramivir,2511,peramivir
+360,206439,namzaric,donepezil hydrochloride; memantine hydrochloride,18614,memantine hydrochloride extended-release and donepezil hydrochloride
+361,206473,linezolid in sodium chloride 0.9% in plastic container,linezolid,NA,NA
+362,206488,exondys 51,eteplirsen,9788,eteplirsen
+363,206494,avycaz,avibactam sodium; ceftazidime,16215,ceftazidime/avibactam
+364,206500,varubi,rolapitant hydrochloride,15913,rolapitant
+365,206510,dutrebis,lamivudine; raltegravir potassium,24032,lamivudine and raltegravir
+366,206538,toujeo solostar,insulin glargine recombinant,19040,insulin glargine
+367,206538,toujeo max solostar,insulin glargine recombinant,NA,NA
+368,206544,morphabond er,morphine sulfate,25408,morphine
+369,206545,zydelig,idelalisib,15282,idelalisib
+370,206619,viekira pak (copackaged),dasabuvir sodium ; ombitasvir; paritaprevir; ritonavir,NA,NA
+371,206627,hysingla,hydrocodone bitartrate,22501,"hydrocodone bitartrate extended release, abuse-deterrent hydrocodone"
+372,206679,flolipid,simvastatin,NA,NA
+373,206709,diacomit,stiripentol,20919,stiripentol
+374,206756,stiolto respimat,olodaterol hydrochloride; tiotropium bromide,18856,tiotropium and olodaterol
+375,206769,argatroban in 0.9% sodium chloride,argatroban,NA,NA
+376,206829,zerbaxa,ceftolozane sulfate; tazobactam sodium,16185,ceftolozane sulfate/tazobactam sodium
+377,206843,daklinza,daclatasvir dihydrochloride,13008,daclatasvir
+378,206910,jadenu,deferasirox,NA,NA
+379,206911,bromsite,bromfenac sodium,17209,bromfenac
+380,206940,viberzi,eluxadoline,17347,eluxadoline
+381,206947,lenvima,lenvatinib mesylate,7833,lenvatinib
+382,206976,licart,diclofenac epolamine,NA,NA
+383,206977,tirosint-sol,levothyroxine sodium,22735,levothyroxine sodium
+384,206995,iressa,gefitinib,215,gefitinib
+385,207026,phoxillum bk 4/2.5 in plastic container,calcium chloride; magnesium chloride; potassium chloride; sodium bicarbonate; sodium chloride; sodium phosphate,NA,NA
+386,207026,phoxillum b22k 4/0 in plastic container,calcium chloride; magnesium chloride; potassium chloride; sodium bicarbonate; sodium chloride; sodium phosphate,NA,NA
+387,207027,promacta,eltrombopag olamine,710,eltrombopag olamine
+388,207070,spiriva respimat,tiotropium bromide,2380,tiotropium bromide
+389,207071,finacea,azelaic acid,26526,azelaic acid
+390,207078,lokelma,sodium zirconium cyclosilicate,23129,sodium zirconium cyclosilicate
+391,207103,ibrance,palbociclib,16321,palbociclib
+392,207131,cefazolin in plastic container,cefazolin sodium,NA,NA
+393,207145,xadago,safinamide mesylate,2204,safinamide mesylate
+394,207154,aczone,dapsone,1295,dapsone
+395,207155,evomela,melphalan hydrochloride,17900,melphalan
+396,207202,abilify mycite,aripiprazole,26729,aripiprazole
+397,207223,diacomit,stiripentol,20919,stiripentol
+398,207233,vivlodex,meloxicam,23605,meloxicam
+399,207315,lamivudine and tenofovir disoproxil fumarate,lamivudine; tenofovir disoproxil fumarate,NA,NA
+400,207318,nuplazid,pimavanserin tartrate,2207,pimavanserin
+401,207369,abacavir; lamivudine,abacavir;lamivudine,NA,NA
+402,207500,cresemba,isavuconazonium sulfate,1971,isavuconazonium sulfate
+403,207501,cresemba,isavuconazonium sulfate,1971,isavuconazonium sulfate
+404,207533,aristada,aripiprazole lauroxil,16341,aripiprazole lauroxil
+405,207534,symjepi,epinephrine,24167,epinephrine
+406,207561,genvoya,cobicistat; elvitegravir; emtricitabine; tenofovir alafenamide fumarate,19497,emtricitabine; cobicistat; elvitegravir; tenofovir alafenamide
+407,207589,enstilar,betamethasone dipropionate; calcipotriene,20214,calcipotriol hydrate; betamethasone dipropionate
+408,207620,entresto,sacubitril; valsartan,11089,valsartan/sacubitril
+409,207621,troxyca er,naltrexone hydrochloride; oxycodone hydrochloride,NA,NA
+410,207648,smoflipid 20%,fish oil; medium chain triglycerides; olive oil; soybean oil,NA,NA
+411,207695,eucrisa,crisaborole,10242,crisaborole
+412,207768,tuzistra xr,chlorpheniramine polistirex; codeine polistirex,22024,codeine polistirex and chlorpheniramine polistirex
+413,207793,onivyde,irinotecan hydrochloride,18209,irinotecan sucrosofate
+414,207795,vyzulta,latanoprostene bunod,3237,latanoprostene bunod
+415,207844,albenza,albendazole,NA,NA
+416,207865,emend,aprepitant,2497,aprepitant
+417,207916,cetylev,acetylcysteine,30829,acetylcysteine
+418,207917,epiduo forte,adapalene; benzoyl peroxide,25688,adapalene and benzoyl peroxide
+419,207920,nexium 24hr,esomeprazole magnesium,NA,NA
+420,207921,qvar redihaler,beclomethasone dipropionate,23819,
+421,207923,seebri,glycopyrrolate,2381,glycopyrronium bromide
+422,207924,olumiant,baricitinib,12314,baricitinib
+423,207925,kalydeco,ivacaftor,2643,ivacaftor
+424,207930,utibron,glycopyrrolate ; indacaterol maleate,2394,glycopyrronium bromide/indacaterol maleate
+425,207931,technivie,ombitasvir; paritaprevir; ritonavir,NA,NA
+426,207932,belbuca,buprenorphine hydrochloride,8651,buprenorphine hydrochloride
+427,207946,invega trinza,paliperidone palmitate,18566,paliperidone palmitate
+428,207947,uptravi,selexipag,10827,selexipag
+429,207953,yondelis,trabectedin,2105,trabectedin
+430,207958,spritam,levetiracetam,26548,levetiracetam
+431,207960,quillichew er,methylphenidate hydrochloride,NA,NA
+432,207962,ztlido,lidocaine,26932,lidocaine
+433,207964,readyprep chg,chlorhexidine gluconate,NA,NA
+434,207968,jadenu sprinkle,deferasirox,NA,NA
+435,207970,cabazitaxel injection,cabazitaxel,NA,NA
+436,207975,vantrela er,hydrocodone bitartrate,16756,
+437,207981,lonsurf,tipiracil hydrochloride; trifluridine,18579,trifluridine/tipiracil
+438,207986,otiprio,ciprofloxacin,23093,ciprofloxacin
+439,207987,ablysinol,alcohol,NA,NA
+440,207988,zurampic,lesinurad,12471,lesinurad
+441,207997,rydapt,midostaurin,1850,midostaurin
+442,207999,ocaliva,obeticholic acid,15236,obeticholic acid
+443,208010,rayaldee,calcifediol,17997,calcifediol
+444,208026,jentadueto xr,linagliptin; metformin hydrochloride,17965,linagliptin and metformin
+445,208030,ferriprox,deferiprone,18599,deferiprone
+446,208032,kovanaze,oxymetazoline hydrochloride; tetracaine hydrochloride,NA,NA
+447,208036,e-z-hd,barium sulfate,NA,NA
+448,208036,e-z-paque,barium sulfate,NA,NA
+449,208036,e-z-cat dry,barium sulfate,NA,NA
+450,208051,nerlynx,neratinib maleate,2697,neratinib maleate
+451,208054,axumin,fluciclovine f-18,24438,
+452,208056,dexilant solutab,dexlansoprazole,27486,dexlansoprazole
+453,208065,tagrisso,osimertinib mesylate,22361,osimertinib
+454,208073,xiidra,lifitegrast,12666,lifitegrast
+455,208078,firdapse,amifampridine phosphate,16014,amifampridine phosphate
+456,208079,sernivo,betamethasone dipropionate,25786,betamethasone dipropionate
+457,208081,ameluz,aminolevulinic acid hydrochloride,19783,5-aminolevulinic acid hydrochloride
+458,208082,austedo,deutetrabenazine,21947,deutetrabenazine
+459,208083,clindamycin phosphate in 0.9% sodium chloride,clindamycin phosphate,NA,NA
+460,208085,xtrelus,guaifenesin; hydrocodone bitartrate,NA,NA
+461,208090,xtampza er,oxycodone,18903,extended-relesease oxycodone
+462,208114,defitelio,defibrotide sodium,3005,defibrotide sodium
+463,208143,readi-cat 2,barium sulfate,NA,NA
+464,208143,readi-cat 2 smoothies,barium sulfate,NA,NA
+465,208143,liquid e-z-paque,barium sulfate,NA,NA
+466,208143,varibar nectar,barium sulfate,NA,NA
+467,208143,tagitol v,barium sulfate,NA,NA
+468,208143,varibar thin honey,barium sulfate,NA,NA
+469,208143,varibar honey,barium sulfate,NA,NA
+470,208144,lumify,brimonidine tartrate,NA,NA
+471,208147,dyanavel xr,amphetamine,26113,
+472,208151,isopto atropine,atropine sulfate,NA,NA
+473,208159,vistogard,uridine triacetate,27186,uridine triacetate
+474,208169,xuriden,uridine triacetate,12171,uridine triacetate
+475,208183,ultravate,halobetasol propionate,20211,halobetasol propionate
+476,208194,bendeka,bendamustine hydrochloride,25445,bendamustine hydrochloride
+477,208215,descovy,emtricitabine; tenofovir alafenamide fumarate,25406,emtricitabine/tenofovir alafenamide
+478,208223,zembrace symtouch,sumatriptan succinate,25789,sumatriptan succinate injection
+479,208224,kyleena,levonorgestrel,21276,
+480,208246,xeljanz xr,tofacitinib citrate,10177,tofacitinib citrate
+481,208251,otovel,ciprofloxacin hydrochloride; fluocinolone acetonide,24678,ciprofloxacin hydrocholride and fluocinolone acetonide
+482,208253,acticlate cap,doxycycline hyclate,32276,doxycycline hyclate USP
+483,208254,rhopressa,netarsudil dimesylate,21336,netarsudil
+484,208255,symfi lo,efavirenz; lamivudine; tenofovir disoproxil fumarate,NA,NA
+485,208261,zepatier,elbasvir; grazoprevir,20096,elbasvir and grazoprevir
+486,208264,tepadina,thiotepa,NA,NA
+487,208271,relistor,methylnaltrexone bromide,2479,methylnaltrexone
+488,208276,remodulin,treprostinil,730,treprostinil sodium
+489,208277,fycompa,perampanel,2066,perampanel
+490,208286,zenavod,doxycycline,25788,doxycycline
+491,208288,soluprep,chlorhexidine gluconate; isopropyl alcohol,NA,NA
+492,208289,akovaz,ephedrine sulfate,27209,ephedrine sulfate
+493,208294,bevespi aerosphere,formoterol fumarate; glycopyrrolate,16235,
+494,208313,infugem,gemcitabine hydrochloride,38545,gemcitabine
+495,208325,parsabiv,etelcalcetide,18110,velcalcetide
+496,208341,epclusa,sofosbuvir; velpatasvir,21499,
+497,208351,odefsey,emtricitabine; rilpivirine hydrochloride; tenofovir alafenamide fumarate,25111,"tenofovir alafenamide, emtricitabine, and rilpivirine"
+498,208374,bivalirudin in 0.9% sodium chloride,bivalirudin,NA,NA
+499,208379,zypitamag,pitavastatin magnesium,37544,pitavastatin magnesium
+500,208383,bevyxxa,betrixaban,10366,betrixaban
+501,208398,vermox,mebendazole,NA,NA
+502,208399,varubi,rolapitant hydrochloride,15913,rolapitant
+503,208400,xatmep,methotrexate sodium,34641,methotrexate
+504,208401,qbrelis,lisinopril,32934,lisinopril
+505,208411,narcan,naloxone hydrochloride,18716,naloxone
+506,208424,gonitro,nitroglycerin,29687,nitroglycerin
+507,208434,alecensa,alectinib hydrochloride,17617,alectinib
+508,208437,lonhala magnair,glycopyrrolate,18864,glycopyrrolate bromide
+509,208447,zejula,niraparib tosylate,14378,niraparib
+510,208462,ninlaro,ixazomib citrate,14992,ixazomib citrate
+511,208464,vemlidy,tenofovir alafenamide fumarate,1042,tenofovir alafenamide fumarate
+512,208471,adlyxin,lixisenatide,1700,lixisenatide
+513,208510,vyvanse,lisdexamfetamine dimesylate,1993,lisdexamfetamine dimesylate
+514,208524,belviq xr,lorcaserin hydrochloride,24919,lorcaserin hydrochloride
+515,208547,netspot,gallium dotatate ga-68,23835,
+516,208551,triferic,ferric pyrophosphate citrate,18141,ferric pyrophosphate
+517,208552,rhofade,oxymetazoline hydrochloride,17122,oxymetazoline hydrochloride
+518,208558,lynparza,olaparib,5962,olaparib
+519,208564,imvexxy,estradiol,22510,estradiol
+520,208573,venclexta,venetoclax,18303,venetoclax
+521,208582,altafluor benox,benoxinate hydrochloride; fluorescein sodium,NA,NA
+522,208583,xultophy 100/3.6,insulin degludec; liraglutide,16314,degludec and liraglutide
+523,208587,endari,l-glutamine,17040,
+524,208603,arymo er,morphine sulfate,21176,morphine sulfate
+525,208610,baxdela,delafloxacin meglumine,17822,delafloxacin
+526,208611,baxdela,delafloxacin meglumine,17822,delafloxacin
+527,208612,balcoltra,ethinyl estradiol; levonorgestrel,37144,levonorgestrel/estradiol/bisglycinate
+528,208623,galafold,migalastat hydrochloride,6669,migalastat hydrochloride
+529,208624,viekira xr,dasabuvir sodium; ombitasvir; paritaprevir; ritonavir,NA,NA
+530,208627,tpoxx,tecovirimat,2642,tecovirimat
+531,208630,gleolan,aminolevulinic acid hydrochloride,25381,aminolevulinic acid hydrochloride
+532,208647,ezallor,rosuvastatin calcium,40659,rosuvastatin
+533,208653,apadaz,acetaminophen; benzhydrocodone hydrochloride,18372,benzhydrocodone hydrochloride and acetaminophen
+534,208658,synjardy xr,empagliflozin; metformin hydrochloride,32626,empagliflozin/metformin hydrochloride
+535,208673,soliqua 100/33,insulin glargine; lixisenatide,17888,insulin glargine/lixisenatide
+536,208684,emflaza,deflazacort,25823,deflazacort
+537,208685,emflaza,deflazacort,25823,deflazacort
+538,208686,epaned,enalapril maleate,23059,
+539,208692,cabometyx,cabozantinib s-malate,2338,cabozantinib
+540,208694,zerviate,cetirizine hydrochloride,24313,cetirizine
+541,208700,lutathera,lutetium dotatate lu-177,19928,lutetium Lu 177 dotatate
+542,208715,cabazitaxel injection,cabazitaxel,NA,NA
+543,208716,verzenio,abemaciclib,18572,abemaciclib
+544,208722,lusduna,insulin glargine,NA,NA
+545,208743,tymlos,abaloparatide,8465,
+546,208745,trulance,plecanatide,11867,plecanatide
+547,208751,fiasp,insulin aspart,17163,
+548,208751,fiasp flextouch,insulin aspart,NA,NA
+549,208772,alunbrig,brigatinib,17852,brigatinib
+550,208775,abacavir and lamivudine,abacavir; lamivudine,NA,NA
+551,208780,esbriet,pirfenidone,1399,pirfenidone
+552,208791,clorotekal,chloroprocaine hydrochloride,39083,chloroprocaine hydrochloride
+553,208794,xermelo,telotristat etiprate,10895,telotristat ethyl
+554,208798,armonair respiclick,fluticasone propionate,23823,fluticasone propionate
+555,208799,airduo respiclick,fluticasone propionate; salmeterol xinafoate,23821,fluticasone/salmeterol
+556,208843,siklos,hydroxyurea,37723,Hydroxyurea
+557,208844,varibar pudding,barium sulfate,NA,NA
+558,208845,zilretta,triamcinolone acetonide,20305,triamcinolone acetonide
+559,208854,symproic,naldemedine tosylate,17646,naldemedine tosilate
+560,208855,verzenio,abemaciclib,18572,abemaciclib
+561,208870,drax exametazime,technetium tc-99m exametazime kit,NA,NA
+562,208901,tolsura,itraconazole,23759,itraconazole
+563,208910,firvanq,vancomycin hydrochloride,37212,vancomycin hydrochloride
+564,208912,dexycu,dexamethasone,20300,dexamethasone
+565,208943,corphedra,ephedrine sulfate,NA,NA
+566,208944,gocovri,amantadine hydrochloride,18613,amantadine HCl extended release
+567,208945,xepi,ozenoxacin,21141,ozenoxacin
+568,208956,triptodur,triptorelin pamoate,34481,triptorelin pamoate
+569,208984,selzentry,maraviroc,2137,maraviroc
+570,209022,xhance,fluticasone propionate,23183,fluticasone propionate
+571,209080,tiglutik,riluzole,39008,riluzole
+572,209089,xyzal allergy 24hr,levocetirizine dihydrochloride,NA,NA
+573,209090,xyzal allergy 24hr,levocetirizine dihydrochloride,NA,NA
+574,209091,qtern,dapagliflozin; saxagliptin hydrochloride,21822,
+575,209092,kisqali,ribociclib succinate,18444,ribociclib
+576,209112,ascor,ascorbic acid,NA,NA
+577,209115,rubraca,rucaparib camsylate,7878,rucaparib
+578,209128,dsuvia,sufentanil citrate,18738,sufentanil
+579,209139,prexxartan,valsartan,36479,valsartan
+580,209176,radicava,edaravone,17777,edaravone
+581,209184,inbrija,levodopa,19275,levodopa
+582,209195,vosevi,sofosbuvir; velpatasvir; voxilaprevir,24018,sofosbuvir/velpatasvir/voxilaprevir
+583,209196,admelog,insulin lispro,24504,insulin lispro
+584,209196,admelog solostar,insulin lispro,NA,NA
+585,209203,duzallo,allopurinol; lesinurad,23629,lesinurad/allopurinol
+586,209210,bydureon bcise,exenatide,19287,exenatide
+587,209229,lucemyra,lofexidine hydrochloride,25000,lofexidine hydrochloride
+588,209241,ingrezza,valbenazine tosylate,16210,valbenazine
+589,209259,xyrosa,doxycycline,NA,NA
+590,209269,minolira,minocycline hydrochloride,NA,NA
+591,209279,tracleer,bosentan,252,bosentan
+592,209296,cinvanti,aprepitant,24879,aprepitant
+593,209299,tavalisse,fostamatinib disodium,1452,fostamatinib disodium hexahydrate
+594,209305,eskata,hydrogen peroxide,23330,hydrogen peroxide
+595,209310,sinuva,mometasone furoate,25209,
+596,209311,jornay pm,methylphenidate hydrochloride,23069,methylphenidate
+597,209347,ganciclovir,ganciclovir ,NA,NA
+598,209353,altreno,tretinoin,27348,tretinoin
+599,209355,bryhali,halobetasol propionate,26542,halobetasol propionate
+600,209360,giapreza,angiotensin ii acetate,22551,angiotensin II
+601,209363,solosec,secnidazole,25842,secnidazole
+602,209381,plenvu,ascorbic acid; polyethylene glycol 3350; potassium chloride; sodium ascorbate; sodium chloride; sodium sulfate,24771,
+603,209387,nipride rtu in sodium chloride 0.9%,sodium nitroprusside,40520,sodium nitroprusside
+604,209394,mavyret,glecaprevir; pibrentasvir,22768,glecaprevir/pibrentasvir
+605,209401,vyxeos,cytarabine; daunorubicin ,16722,
+606,209410,osmolex er,amantadine hydrochloride,21844,amantadine hydrochloride extended release
+607,209449,nityr,nitisinone,35691,nitisinone
+608,209478,carospir,spironolactone,39743,Spironolactone
+609,209482,trelegy ellipta,fluticasone furoate; umeclidinium bromide; vilanterol trifenatate,24370,fluticasone furoate/umeclidinium bromide/vilanterol
+610,209483,impoyz,clobetasol propionate,26090,clobetasol propionate
+611,209501,lyrica cr,pregabalin,22837,pregabalin
+612,209512,norvir,ritonavir,NA,NA
+613,209521,seysara,sarecycline hydrochloride,20558,sarecycline
+614,209531,spinraza,nusinersen sodium,18461,nusinersen
+615,209566,seizalam,midazolam hydrochloride,40574,midazolam hydrochloride
+616,209589,clenpiq,citric acid; magnesium oxide; sodium picosulfate,36742,"sodium picosulfate, magnesium oxide, and anhydrous citric acid"
+617,209606,idhifa,enasidenib mesylate,22255,enasidenib
+618,209607,azedra,iobenguane i-131,15129,iobenguane I-131
+619,209627,annovera,ethinyl estradiol; segesterone acetate,16458,segesterone acetate and ethinyl estradiol
+620,209637,ozempic,semaglutide,10488,semaglutide
+621,209661,bonjesta,doxylamine succinate; pyridoxine hydrochloride,37769,doxylamine succinate/pyridoxine hydrochloride
+622,209670,"dolutegravir, lamivudine, and tenofovir disoproxil fumarate",dolutegravir;lamivudine;tenofovir disoproxil fumarate,NA,NA
+623,209776,vabomere,meropenem; vaborbactam,20993,meropenem/vaborbactam
+624,209777,roxybond,oxycodone hydrochloride,34053,oxycodone
+625,209803,steglatro,ertugliflozin,17231,ertugliflozin
+626,209805,steglujan,ertugliflozin; sitagliptin phosphate,24323,ertugliflozin/sitagliptin
+627,209806,segluromet,ertugliflozin; metformin hydrochloride,36158,ertugliflozin/metformin
+628,209816,nuzyra,omadacycline tosylate,3132,omadacycline
+629,209817,nuzyra,omadacycline tosylate,3132,omadacycline
+630,209819,sublocade,buprenorphine,23746,buprenorphine hydrochloride
+631,209830,aristada initio,aripiprazole lauroxil,36422,aripiprazole lauroxil
+632,209844,lymepak,doxycycline hyclate,NA,NA
+633,209862,evzio,naloxone hydrochloride,23925,naloxone hydrochloride
+634,209863,xyosted (autoinjector),testosterone enanthate,21624,testosterone enanthate
+635,209875,nikita,pitavastatin sodium,NA,NA
+636,209885,austedo,deutetrabenazine,21947,deutetrabenazine
+637,209935,kisqali femara co-pack (copackaged),letrozole; ribociclib succinate,34849,ribociclib/letrozole
+638,209936,aliqopa,copanlisib dihydrochloride,18359,copanlisib
+639,209939,prevymis,letermovir,21185,letermovir
+640,209940,prevymis,letermovir,21185,letermovir
+641,209963,goprelto,cocaine hydrochloride,NA,NA
+642,210045,consensi,amlodipine besylate; celecoxib,26794,celecoxib/amlodipine
+643,210115,prograf,tacrolimus,1689,tacrolimus
+644,210132,bijuva,estradiol; progesterone,22513,estradiol and progesterone
+645,210166,motegrity,prucalopride succinate,17094,prucalopride
+646,210192,juluca,dolutegravir sodium; rilpivirine hydrochloride,24231,rilpivirine; dolutegravir
+647,210238,doptelet,avatrombopag maleate,8373,avatrombopag maleate
+648,210251,biktarvy,bictegravir sodium; emtricitabine; tenofovir alafenamide fumarate,25407,bictegravir/emtricitabine/tenofovir alafenamide
+649,210259,calquence,acalabrutinib,23530,acalabrutinib
+650,210303,zemdri,plazomicin sulfate,16682,plazomicin
+651,210308,yonsa,abiraterone acetate,34794,abiraterone acetate
+652,210331,yutiq,fluocinolone acetonide,NA,NA
+653,210361,qbrexza,glycopyrronium tosylate,24058,glycopyrronium tosylate
+654,210365,epidiolex,cannabidiol,23288,cannabidiol
+655,210428,kapspargo sprinkle,metoprolol succinate,38717,metoprolol succinate
+656,210450,orilissa,elagolix sodium,228,elagolix
+657,210455,symtuza,cobicistat; darunavir ethanolate; emtricitabine; tenofovir alafenamide fumarate,19495,
+658,210491,symdeko (copackaged),"ivacaftor; ivacaftor, tezacaftor",18177,tezacaftor
+659,210493,akynzeo,fosnetupitant chloride hydrochloride; palonosetron hydrochloride,17831,netupitant and palonosetron
+660,210496,braftovi,encorafenib,20088,encorafenib
+661,210498,mektovi,binimetinib,2858,binimetinib
+662,210563,imbruvica,ibrutinib,14596,ibrutinib
+663,210565,inveltys,loteprednol etabonate,23044,loteprednol etabonate
+664,210589,omegaven,fish oil triglycerides,NA,NA
+665,210598,yupelri,revefenacin,9719,revefenacin
+666,210607,arakoda,tafenoquine succinate,35005,tafenoquine succinate
+667,210655,perseris,risperidone,25987,risperidone
+668,210656,daurismo,glasdegib,19013,glasdegib maleate
+669,210709,tekturna,aliskiren hemifumarate,1813,aliskiren
+670,210795,krintafel,tafenoquine succinate,22062,tafenoquine succinate
+671,210806,pifeltro,doravirine,20582,doravirine
+672,210807,delstrigo,doravirine; lamivudine; tenofovir disoproxil fumarate,38930,"doravirine, lamivudine, tenofovir disoproxil fumarate"
+673,210833,sympazan,clobazam,37135,clobazam
+674,210854,xofluza,baloxavir marboxil,25663,baloxavir marboxil
+675,210861,vitrakvi,larotrectinib,23170,larotrectinib
+676,210868,lorbrena,lorlatinib,23831,lorlatinib
+677,210884,tosymra,sumatriptan,30866,sumatriptan nasal spray
+678,210906,calcium gluconate in sodium chloride,calcium gluconate,NA,NA
+679,210910,aemcolo,rifamycin,16223,rifamycin
+680,210913,cequa,cyclosporine,27691,cyclosporine
+681,210922,onpattro,patisiran sodium,19085,patisiran
+682,210923,mulpleta,lusutrombopag,16124,lusutrombopag
+683,210951,erleada,apalutamide,18455,apalutamide
+684,210997,glyrx-pf,glycopyrrolate,38548,glycopyrrolate
+685,211109,xerava,eravacycline dihydrochloride,16847,eravacycline
+686,211155,copiktra,duvelisib,18679,duvelisib
+687,211172,tegsedi,inotersen sodium,18210,inotersen
+688,211192,tibsovo,ivosidenib,21887,ivosidenib
+689,211210,qmiiz odt,meloxicam,NA,NA
+690,211226,khapzory,levoleucovorin,39362,levoleucovorin
+691,211284,temixys,lamivudine; tenofovir disoproxil fumarate,39686,lamivudine and tenofovir disoproxil fumarate
+692,211288,vizimpro,dacomitinib,7655,dacomitinib
+693,211358,orkambi,ivacaftor; lumacaftor,9964,lumacaftor; ivacaftor
+694,211580,spy agent green,indocyanine green,NA,NA
+695,211651,talzenna,talazoparib tosylate,17726,talazoparib
+696,212319,atropine (autoinjector),atropine,NA,NA
+697,761024,amjevita,adalimumab-atto,23159,adalimumab
+698,761025,praxbind,idarucizumab,22934,idarucizumab
+699,761028,mvasi,bevacizumab-awwb,23155,bevacizumab-awwb
+700,761029,zinbryta,daclizumab,NA,NA
+701,761032,siliq,brodalumab,14327,brodalumab
+702,761033,cinqair,reslizumab,14169,reslizumab
+703,761034,tecentriq,atezolizumab,20599,atezolizumab
+704,761035,empliciti,elotuzumab,3222,elotuzumab
+705,761036,darzalex,daratumumab,9620,daratumumab
+706,761037,kevzara,sarilumab,9547,sarilumab
+707,761038,lartruvo,olaratumab,NA,NA
+708,761039,udenyca,pegfilgrastim-cbqv,24670,pegfilgrastim-cbqv
+709,761040,besponsa,inotuzumab ozogamicin,638,
+710,761041,tecentriq,atezolizumab,20599,atezolizumab
+711,761042,erelzi,etanercept-szzs,24029,etanercept-szzs
+712,761043,benlysta,belimumab,90,belimumab
+713,761044,stelara,ustekinumab,464,ustekinumab
+714,761046,zinplava,bezlotoxumab,2078,bezlotoxumab
+715,761047,mepsevii,vestronidase alfa-vjbk,19615,vestronidase alfa-vjbk
+716,761049,bavencio,avelumab,22109,avelumab
+717,761051,poteligeo,mogamulizumab-kpkc,10467,mogamulizumab-kpkc
+718,761052,brineura,cerliponase alfa,19562,cerliponase alfa
+719,761053,ocrevus,ocrelizumab,2157,ocrelizumab
+720,761054,renflexis,infliximab-abda,23977,infliximab-abda
+721,761055,dupixent,dupilumab,16792,dupilumab
+722,761058,cyltezo,adalimumab-adbm,22429,adalimumab-adbm
+723,761060,mylotarg,gemtuzumab ozogamicin,646,gemtuzumab ozogamicin for injection
+724,761061,tremfya,guselkumab,15478,guselkumab
+725,761063,emgality,galcanezumab-gnlm,21254,galcanezumab-gnlm
+726,761064,rituxan hycela,hyaluronidase;rituximab,15791,rituximab
+727,761065,trogarzo,ibalizumab-uiyk,213,ibalizumab
+728,761067,ilumya,tildrakizumab-asmn,16021,tildrakizumab-asmn
+729,761068,crysvita,burosumab-twza,19515,burosumab-twza
+730,761069,imfinzi,durvalumab,21140,durvalumab
+731,761070,fasenra,benralizumab,3006,benralizumab
+732,761071,hyrimoz,adalimumab-adaz,23452,adalimumab-adaz
+733,761072,ixifi,infliximab-qbtx,22783,infliximab-qbtx
+734,761074,ogivri,trastuzumab-dkst,19864,trastuzumab-dkst
+735,761075,fulphila,pegfilgrastim-jmdb,19865,pegfilgrastim-jmdb
+736,761077,aimovig,erenumab-aooe,21363,erenumab-aooe
+737,761079,palynziq,pegvaliase-pqpz,9533,pegvaliase
+738,761080,nivestym,filgrastim-aafi,29439,filgrastim-aafi
+739,761083,hemlibra,emicizumab,21209,emicizumab-kxwh
+740,761088,truxima,rituximab-abbs,19644,rituximab
+741,761089,ajovy,fremanezumab-vfrm,19000,fremanezumab-vfrm
+742,761090,takhzyro,lanadelumab (shp643),20691,lanadelumab-flyo
+743,761091,herzuma,trastuzumab-pkrb,19641,trastuzumab-pkrb
+744,761092,revcovi,elapegademase-lvlr,25746,elapegademase-lvlr
+745,761094,oxervate,cenegermin-bkbj,24332,
+746,761097,libtayo,cemiplimab-rwlc,25212,cemiplimab-rwlc
+747,761100,ontruzant,trastuzumab-dttb,24207,trastuzumab-dttb
+748,761102,asparlas,calaspargase pegol-mknl,21805,calaspargase pegol
+749,761104,lumoxiti,moxetumomab pasudotox-tdfk,16117,moxetumomab pasudotox-tdfk
+750,761107,gamifant,emapalumab-lzsg,24699,emapalumab-lzsg
+751,761108,ultomiris,ravulizumab-cwvz,25373,ravulizumab-cwvz
+752,761116,elzonris,tagraxofusp-erzs,18100,tagraxofusp-erzs
+,20772,sucraid,sacrosidase,NA,
+,20947,pennsaid,diclofenac sodium,16502,
+,21747,combivent respimat,albuterol sulfate; ipratropium bromide,NA,
+,22037,intuniv,guanfacine hydrochloride,2795,
+,22087,vectical,calcitriol,NA,
+,22113,advil allergy and congestion relief,chlorpheniramine maleate; ibuprofen; phenylephrine hydrochloride,NA,
+,22217,valturna,aliskiren hemifumarate; valsartan,NA,
+,22251,lamictal odt,lamotrigine,NA,
+,22272,oxycontin,oxycodone hydrochloride,18540,
+,22277,temodar,temozolomide,NA,
+,22278,membraneblue,trypan blue,NA,
+,22281,zegerid otc,omeprazole; sodium bicarbonate,NA,
+,22282,atazanavir sulfate and ritonavir,atazanavir sulfate; ritonavir,NA,
+,22299,nevirapine tablets for oral suspension,nevirapine,NA,
+,22305,pur-wash,purified water,NA,
+,22314,exforge hct,amlodipine besylate; hydrochlorothiazide; valsartan,8625,
+,22318,renvela,sevelamer carbonate,2581,
+,22327,prevacid 24 hr,lansoprazole,NA,
+,22331,jenloga,clonidine hydrochloride,8370,
+,22345,potiga,ezogabine,NA,
+,22356,"lamivudine, zidovudine tabs 150mg/300mg co-packaged with nevirapine tabs 200mg",lamivudine; zidovudine; nevirapine,NA,
+,22360,nicorette,nicotine polacrilex,NA,
+,22368,aridol,mannitol,NA,
+,22372,suprep bowel prep,magnesium sulfate; potassium sulfate; sodium sulfate,40532,
+,22377,alsuma,sumatriptan succinate,NA,
+,22410,suboxone,buprenorphine hydrochloride; naloxone hydrochloride,21052,
+,22417,norvir,ritonavir,NA,
+,22420,efavirenz 200mg scored tablets,efavirenz,NA,
+,22427,acuvail,ketorolac tromethamine,NA,
+,22428,moxeza,moxifloxacin hydrochloride,NA,
+,22429,cetirizine hydrochloride allergy,cetirizine hydrochloride,NA,
+,22434,argatroban in sodium chloride,argatroban,NA,
+,22439,zutripro,chlorpheniramine maleate; hydrocodone bitartrate; pseudoephedrine hydrochloride,NA,
+,22442,rezira,hydrocodone bitartrate; pseudoephedrine hydrochloride,NA,
+,22456,magnesium hydroxide and omeprazole and sodium bicarbonate,magnesium hydroxide; omeprazole; sodium bicarbonate,NA,
+,22459,lamivudine/tenofovir disoproxil fumarate fdc tabs,lamivudine; tenofovir,NA,
+,22460,jalyn,dutasteride; tamsulosin hydrochloride,NA,
+,22465,votrient,pazopanib hydrochloride,2454,
+,22470,nexcede,ketoprofen,NA,
+,22479,lamivudine and stavudine,lamivudine; stavudine,NA,
+,22485,argatroban in sodium chloride,argatroban,682,
+,22494,sodium fluoride f 18,sodium fluoride f-18,NA,
+,22497,forfivo xl,bupropion hydrochloride,18340,
+,22502,differin,adapalene,NA,
+,22504,axiron,testosterone,NA,
+,22541,lamivudine and stavudine,lamivudine; stavudine,NA,
+,22548,zymaxid,gatifloxacin,NA,
+,22555,cysview,hexaminolevulinate hydrochloride,NA,
+,22565,advil congestion relief,ibuprofen; phenylephrine hydrochloride,NA,
+,22568,aricept,donepezil hydrochloride,8304,
+,22573,norethindrone and ethinyl estradiol and ferrous fumarate,ethinyl estradiol; norethindrone,NA,
+,22578,zyrtec allergy,cetirizine hydrochloride,NA,
+,22581,phoslyra,calcium acetate,NA,
+,50803,veltin,clindamycin phosphate; tretinoin,NA,
+,50821,cefepime and dextrose in duplex container,cefepime hydrochloride,NA,
+,50823,ceftazidime in dextrose container,ceftazidime,NA,
+,50824,omeprazole and clarithromycin and amoxicillin,amoxicillin; clarithromycin; omeprazole,NA,
+,125289,simponi,golimumab,463,
+,125291,lumizyme,alglucosidase alfa,441,
+,125326,arzerra,ofatumumab,462,
+,200179,staxyn,vardenafil hydrochloride,NA,
+,200199,topotecan,topotecan hydrochloride,NA,
+,200738,lotemax,loteprednol etabonate,NA,
+,200793,lamivudine/nevirapine/zidovudine tablets,lamivudine; nevirapine; zidovudine,NA,
+,200890,isopto carpine,pilocarpine hydrochloride,NA,
+,201373,children's allegra allergy,fexofenadine hydrochloride,NA,
+,201444,nithiodote,sodium nitrite; sodium thiosulfate,NA,
+,201655,opana er,oxymorphone hydrochloride,NA,
+,201743,argatroban in dextrose,argatroban,NA,
+,201917,incivek,telaprevir,NA,
+,202258,victrelis,boceprevir,NA,
+,202343,juvisync,simvastatin; sitagliptin phosphate,NA,
+,202513,gelnique 3%,oxybutynin,8161,
+,202543,levetiracetam in sodium chloride,levetiracetam,NA,

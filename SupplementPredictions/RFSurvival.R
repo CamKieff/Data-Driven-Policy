@@ -207,6 +207,10 @@ df$ORIG_PRIORITY <- factor(df$ORIG_PRIORITY)
 levels(df$Route_of_Administration)[levels(df$Route_of_Administration) == ""] <- NA
 levels(df$Route_of_Administration)[levels(df$Route_of_Administration) == "N/A"] <- NA
 
+#df <- df[!is.na(df$Route_of_Administration), ]
+#df <- df[!is.na(df$SubmissionClassCodeID.x),]
+#df <- df[!is.na(df$Public),]
+
 levels(df$Disease_Group)[levels(df$Disease_Group) == "Rheumatology (non autoimmune)" ] <- "Rheumatology"
 levels(df$Disease_Group)[levels(df$Disease_Group) == "Gastroenterology (non inflammatory bowel disease)" ] <- "Gastroenterology"
 
@@ -246,7 +250,7 @@ df <- distinct(df) %>% select(-ApplNo)
 set.seed(1606) # set start point for random number generator
 
 # manually create test data
-training_row <- sample(round(nrow(df)*1, 0), replace = FALSE)
+training_row <- sample(round(nrow(df)*0.8, 0), replace = FALSE)
 training.data <- df[training_row, ] # select training data, 80% of all data.
 test.data <- df[-training_row,]
 
@@ -267,3 +271,87 @@ pred
 yvar <- fit$yvar
 rsf.pred <- fit$predicted.oob
 rsf.err <- get.cindex(yvar$DAY_DELAY, yvar$SURVIVAL, rsf.pred)
+
+
+# ---------------------------------------- Plots ---------------------------------------------
+
+# Density plot
+which.max(density(df[df$SURVIVAL== 1,]$DAY_DELAY)$y)
+max_density_day <- density(df[df$SURVIVAL== 1,]$DAY_DELAY)$x[129] #1.4 years (493 days); only includes confirmed supplements
+median(df$DAY_DELAY)
+
+p <- (ggplot(df[df$SURVIVAL== 1,], aes(x=DAY_DELAY, stat(count))) 
+  + geom_density()
+  + geom_vline(aes(xintercept=max_density_day), color="blue", linetype="dashed", size=1)
+  + xlab("Time since Original Application Approval (Days)")
+  + ylab("Probability Density")
+  #+ ylim(0,1)
+  + theme_bw()
+  + scale_colour_brewer(palette = "Set2")
+  + theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), 
+          axis.line = element_line(colour = "black"), panel.border = element_blank(),
+          axis.text = element_text(size=14), axis.title = element_text(size=14), 
+          plot.title = element_text(size = 24), legend.text = element_text(size = 12),
+          legend.title = element_text(size = 14))
+)
+
+p 
+
+df$extra <- 1
+surv.object <- Surv(df$DAY_DELAY, df$SURVIVAL)
+
+pred.object <- Surv(pred$yvar$DAY_DELAY, pred$yvar$SURVIVAL)
+
+pred.fit.obj <- survfit(pred.object ~ rep(1, length(pred$yvar$SURVIVAL)))
+surv.fit.obj <- survfit(surv.object ~ df$extra)
+
+surv.fit.obj <- survfit(surv.object ~ df$Drug_Classification)
+plot(surv.fit.obj, col = c("black", "blue", "red", "green"))
+# "Biologic"   "Biosimilar" "NME"        "Non-NME"    "Vaccine"   
+
+plot(pred.fit.obj)
+df$DAY_DELAY <- as.numeric(df$DAY_DELAY)
+library(ggRandomForests)
+test_gg_pred <-gg_rfsrc(fit, oob = TRUE, conf.int=.95, surv_type = "surv")
+plot(test_gg_pred)
+test_gg_fit <- gg_survival(interval = "DAY_DELAY", censor = "SURVIVAL", data = as.data.frame(df), conf.int = 0.95)
+plot(test_gg_fit)
+
+new_fit_df <-as.data.frame(cbind(fit$time.interest, colMeans(fit$survival), apply(fit$survival, 2, sd)))
+new_pred_df <- as.data.frame(cbind(pred$time.interest, colMeans(pred$survival), apply(pred$survival, 2, sd)))
+names(new_pred_df) <- c("time", "mean", "sd")
+names(new_fit_df) <- c("time", "mean", "sd")
+
+new_fit_df <-as.data.frame(cbind(surv.fit.obj$time, surv.fit.obj$surv))
+names(new_fit_df) <- c("time", "mean")
+new_pred_df$sd <- NULL
+
+new_fit_df$test <- "all data"
+new_pred_df$test <- "pred"
+
+comb_df <- rbind(new_fit_df, new_pred_df)
+
+g0 <- (ggplot(data = comb_df, aes(x = time, y = mean, color = test)) 
+  + geom_step(size = 1.3)
+  #+ labs(title = "Industry-Sponsored T2DM Clinical Trials by Phase")
+  + xlab("Time since Original Application Approval (Days)")
+  + ylab("Inverse Cum. Probability of 1st Efficacy Supplement (1-%)")
+  #+ ylim(0,1)
+  + theme_bw()
+  + scale_colour_brewer(palette = "Set2")
+  + theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), 
+          axis.line = element_line(colour = "black"), panel.border = element_blank(),
+          axis.text = element_text(size=14), axis.title = element_text(size=14), 
+          plot.title = element_text(size = 24), legend.text = element_text(size = 12),
+          legend.title = element_text(size = 14))
+)
+g0
+
+new_pred_df <- new_pred_df %>% 
+  mutate(upper = mean + sd*1.96/sqrt(nrow(pred$survival))) %>% #don't think these are correct
+  mutate(lower = mean - sd*1.96/sqrt(nrow(pred$survival)))
+#plot(new_df)
+
+
+g0 <- ggplot(data = new_pred_df, aes(x = time, y = mean, ymax = upper, ymin = lower)) + geom_ribbon(alpha = 0.3) +geom_line() 
+g0
